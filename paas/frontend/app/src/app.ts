@@ -5,8 +5,9 @@ import { Property as components_properties } from '@sreworks/components';
 import { Property as widgets_properties } from '@sreworks/widgets';
 import { Property as frame_properties } from '@sreworks/framework';
 import properties from './properties';
-import GlobalTheme from '../config/globalTheme';
 import less from 'less';
+
+declare const THEMES: any;
 import 'antd/dist/antd.css';
 import 'react-grid-layout/css/styles.css';
 import 'react-resizable/css/styles.css';
@@ -22,7 +23,6 @@ widgets_properties.injectProperties(properties);
 frame_properties.injectProperties(properties);
 
 // 主题初始化
-(window as any).THEMES = GlobalTheme;
 let themeType = localStorage.getItem('sreworks-theme');
 if (!themeType) {
   localStorage.setItem('sreworks-theme', 'light');
@@ -32,7 +32,7 @@ if (themeType === 'dark') {
   localStorage.setItem('sreworks-theme', 'navyblue');
 }
 if (themeType === 'navyblue' && (window as any).less) {
-  (window as any).less.modifyVars(GlobalTheme[themeType]);
+  (window as any).less.modifyVars(THEMES[themeType]);
 }
 
 // 运行时配置

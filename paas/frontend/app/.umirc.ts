@@ -1,4 +1,5 @@
 import { defineConfig } from 'umi';
+import GlobalTheme from './config/globalTheme';
 
 export default defineConfig({
   dva: {
@@ -20,6 +21,10 @@ export default defineConfig({
     javascriptEnabled: true,
   },
 
+  define: {
+    THEMES: GlobalTheme,
+  },
+
   externals: {
     'react': 'React',
     'react-dom': 'ReactDOM',
@@ -38,7 +43,7 @@ export default defineConfig({
 
   proxy: {
     '/gateway': {
-      target: 'http://localhostl:8080',  // 填入实际后端地址
+      target: '',
       changeOrigin: true,
       cookieDomainRewrite: 'localhost',
     },

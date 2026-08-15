@@ -109,9 +109,10 @@ dependency_arr_init().forEach(item => {
     fs.copySync(item.from, item.to)
 })
 console.log("init runtime paths successfull")
-let indexHtml = fs.readFileSync(paths.appPublic + '/index.html', 'utf8')
+const indexHtmlPath = path.join(paths.appSrc, 'pages', 'document.ejs')
+let indexHtml = fs.readFileSync(indexHtmlPath, 'utf8')
 indexHtml = indexHtml.replace(/moment\/.([\s\S]){1,}\/moment.min.js/gm, `moment/${momentPath}/moment.min.js`).replace(/antd\/([\s\S]){1,}\/antd.min.js/gm, `antd/${antdPath}/antd.min.js`).replace(/react\/.([\s\S]){1,}\/react.production.min.js/gm, `react/${reactPath}/react.production.min.js`).replace(/react-dom\/.([\s\S]){1,}\/react-dom.production.min.js/gm, `react-dom/${react_dom_path}/react-dom.production.min.js`).replace(/systemjs\/([\s\S]){1,}\/system.min.js/gm, `systemjs/${systemjsPath}/system.min.js`)
-fs.writeFileSync(paths.appPublic + '/index.html', indexHtml, 'utf8')
+fs.writeFileSync(indexHtmlPath, indexHtml, 'utf8')
 module.exports = {
     antdPath,
     momentPath,
