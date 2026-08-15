@@ -3,8 +3,7 @@
  * 应用主文件
  **/
 import React from 'react'
-import { connect } from 'dva'
-import { withRouter } from 'dva/router'
+import { connect, history } from 'umi'
 import { Spin, Alert, Popover, Button, Space } from 'antd'
 import DefaultLayout from '../layouts/DefaultLayout'
 import { Loading, JsonEditor } from '@sreworks/components'
@@ -31,9 +30,7 @@ class Application extends React.Component {
     this.loadRemoteComp()
   }
   componentDidMount() {
-    const { dispatch, routes, app, global } = this.props
-    global.app = app
-    dispatch({ type: 'global/hookRoutes', payload: { routes: routes } })
+    const { dispatch, global } = this.props
     // 初始化全局配置平台名称和logo
     this.setHeader()
   }
@@ -193,11 +190,11 @@ class Application extends React.Component {
           </div>
         )}
         <Spin tip="Loading..." size="large" spinning={fakeGlobal}>
-          <DefaultLayout {...this.props} />
+          <DefaultLayout {...this.props}>{this.props.children}</DefaultLayout>
         </Spin>
       </div>
     )
   }
 }
 
-export default withRouter(connect(({ global }) => ({ global }))(Application))
+export default connect(({ global }) => ({ global }))(Application)

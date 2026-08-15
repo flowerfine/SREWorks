@@ -1,5 +1,4 @@
 const path = require('path');
-const { generateTheme } = require('antd-theme-generator');
 const lessToJs = require('less-vars-to-js');
 const fs = require('fs');
 
