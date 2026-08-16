@@ -2,10 +2,7 @@ import { defineConfig } from 'umi';
 import GlobalTheme from './config/globalTheme';
 
 export default defineConfig({
-  dva: {
-    immer: true,
-    hmr: true,
-  },
+  dva: {},
   antd: {},
   hash: true,
   history: { type: 'hash' },
@@ -43,7 +40,7 @@ export default defineConfig({
 
   proxy: {
     '/gateway': {
-      target: '',
+      target: 'http://115.29.236.184:30767/',
       changeOrigin: true,
       cookieDomainRewrite: 'localhost',
     },
