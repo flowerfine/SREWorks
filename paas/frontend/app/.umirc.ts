@@ -9,6 +9,10 @@ export default defineConfig({
   publicPath: process.env.NODE_ENV === 'production' ? './' : '/',
   outputPath: 'build',
 
+  copy: [
+    { from: 'src/assets/icons', to: 'static/icons' },
+  ],
+
   alias: {
     '@': './src',
   },

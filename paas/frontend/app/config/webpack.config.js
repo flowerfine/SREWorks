@@ -233,7 +233,7 @@ module.exports = {
       {
         from: paths.appSrc + '/assets/icons',
         to: paths.appBuild + '/static/icons'
-    }
+      }
     ],
   }),
   new webpack.ProgressPlugin({

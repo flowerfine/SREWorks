@@ -5,6 +5,7 @@ import { Property as components_properties } from '@sreworks/components';
 import { Property as widgets_properties } from '@sreworks/widgets';
 import { Property as frame_properties } from '@sreworks/framework';
 import properties from './properties';
+//不能去掉用于引入less.js来换肤使用! window.less.xxx 会有用，需要加载进来，但不是这里使用
 import less from 'less';
 
 declare const THEMES: any;
@@ -21,6 +22,10 @@ util_properties.injectProperties(properties);
 components_properties.injectProperties(properties);
 widgets_properties.injectProperties(properties);
 frame_properties.injectProperties(properties);
+
+// 显式挂载 less 到 window：less 浏览器版加载时会把 window.less 替换为完整 API（含 modifyVars），
+// 这里显式引用 `less` 防止被 webpack tree-shaking 掉
+;(window as any).less = less
 
 // 主题初始化
 let themeType = localStorage.getItem('sreworks-theme');
