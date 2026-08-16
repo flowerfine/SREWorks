@@ -4,7 +4,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Menu } from 'antd'
-import { Link } from 'dva/router'
+import { Link } from 'umi'
 
 const TopMenus = ({ location, currentModule }) => {
   if (!currentModule) return <div />

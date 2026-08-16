@@ -6,7 +6,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Icon as LegacyIcon } from '@ant-design/compatible'
 import { Menu } from 'antd'
-import { Link } from 'dva/router'
+import { Link } from 'umi'
 import { util } from '@sreworks/shared-utils'
 import properties from '../../properties'
 

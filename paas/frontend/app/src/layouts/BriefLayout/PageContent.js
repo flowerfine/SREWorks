@@ -3,7 +3,7 @@
  */
 import React from 'react'
 import { Layout, Avatar, PageHeader, Tabs, Descriptions, Menu } from 'antd'
-import { Link } from 'dva/router'
+import { Link } from 'umi'
 
 const { Content } = Layout
 

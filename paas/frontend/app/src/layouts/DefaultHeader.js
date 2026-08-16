@@ -4,7 +4,7 @@
  */
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Link } from 'dva/router'
+import { Link } from 'umi'
 import { DownOutlined, LogoutOutlined, QuestionCircleOutlined } from '@ant-design/icons'
 import { Icon as LegacyIcon } from '@ant-design/compatible'
 import { Layout, Menu, Switch, Dropdown, Tooltip, Divider, Radio } from 'antd'
