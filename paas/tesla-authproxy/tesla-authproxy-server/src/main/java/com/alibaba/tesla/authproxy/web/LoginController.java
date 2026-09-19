@@ -48,16 +48,14 @@ import java.util.Optional;
  * @version 1.0
  * @date 2017年5月3日
  */
-@Controller
 @Slf4j
+@Controller
 public class LoginController extends BaseController {
 
     @Autowired
     private AuthProperties authProperties;
-
     @Autowired
     private TeslaAppService teslaAppService;
-
     @Autowired
     private TeslaUserService teslaUserService;
 
@@ -75,7 +73,7 @@ public class LoginController extends BaseController {
     @ResponseBody
     public TeslaResult login(@Valid @RequestBody DataBaseAccountLoginParam param, BindingResult bindingResult,
                              HttpServletRequest request, HttpServletResponse response)
-        throws DataBaseValidationError, PrivateValidationError {
+            throws DataBaseValidationError, PrivateValidationError {
         if (bindingResult.hasErrors()) {
             return buildValidationResult(bindingResult);
         }
@@ -83,13 +81,13 @@ public class LoginController extends BaseController {
 
         //每次点击登录先清理cookie
         String topDomain;
-        if(StringUtil.isEmpty(authProperties.getCookieDomain())){
+        if (StringUtil.isEmpty(authProperties.getCookieDomain())) {
             topDomain = CookieUtil.getCookieDomain(request, authProperties.getCookieDomain());
             CookieUtil.cleanDomainCookie(request, response, Constants.COOKIE_DATABASE_LOGIN_TOKEN, topDomain, "/");
             CookieUtil.cleanDomainCookie(request, response, Constants.COOKIE_DATABASE_LOGIN_USER_ID, topDomain, "/");
             CookieUtil.cleanDomainCookie(request, response, Constants.COOKIE_LANG, topDomain, "/");
             CookieUtil.cleanDomainCookie(request, response, Constants.COOKIE_COUNTRY, topDomain, "/");
-        }else{
+        } else {
             topDomain = null;
             CookieUtil.cleanLoginCookie(request, response, Constants.COOKIE_DATABASE_LOGIN_TOKEN);
             CookieUtil.cleanLoginCookie(request, response, Constants.COOKIE_DATABASE_LOGIN_USER_ID);
@@ -105,17 +103,19 @@ public class LoginController extends BaseController {
 
         //写入tesla token cookie
         String teslaToken = TeslaJwtUtil.create(userDo.getEmpId(), userDo.getLoginName(),
-            Objects.toString(userDo.getBucId()), userDo.getEmail(),
-            UserUtil.getUserId(userDo), userDo.getNickName(), userDo.getAliyunPk(), TeslaJwtUtil.JWT_TOKEN_TIMEOUT,
-            authProperties.getOauth2JwtSecret());
+                Objects.toString(userDo.getBucId()), userDo.getEmail(),
+                UserUtil.getUserId(userDo), userDo.getNickName(), userDo.getAliyunPk(), TeslaJwtUtil.JWT_TOKEN_TIMEOUT,
+                authProperties.getOauth2JwtSecret());
         if (Objects.equals(authProperties.getNetworkProtocol(), "https")) {
-            ResponseCookie responseCookie = ResponseCookie.builder().name(AuthProxyConstants.COOKIE_SSO_LOGIN_TOKEN).value(teslaToken)
-                .maxAge(Duration.ofSeconds(24 * 60 * 60))
-                .domain(authProperties.getCookieDomain())
-                .sameSite("None")
-                .secure(true)
-                .path("/")
-                .build();
+            ResponseCookie responseCookie = ResponseCookie.builder()
+                    .name(AuthProxyConstants.COOKIE_SSO_LOGIN_TOKEN)
+                    .value(teslaToken)
+                    .maxAge(Duration.ofSeconds(24 * 60 * 60))
+                    .domain(authProperties.getCookieDomain())
+                    .sameSite("None")
+                    .secure(true)
+                    .path("/")
+                    .build();
             response.addHeader("Set-Cookie", responseCookie.toString());
         } else {
             CookieUtil.setCookie(response, AuthProxyConstants.COOKIE_SSO_LOGIN_TOKEN, teslaToken, 0);
@@ -124,14 +124,14 @@ public class LoginController extends BaseController {
         // 登录成功后生成Cookie写入当前 response 中
         try {
             CookieUtil.setCookie(response, Constants.COOKIE_DATABASE_LOGIN_USER_ID, userDo.getLoginName(),
-                Constants.DEFAULT_COOKIE_TIME, topDomain);
+                    Constants.DEFAULT_COOKIE_TIME, topDomain);
             /**
              * token的时间设置比cookie稍微长一点，防止cookie校验通过后token验证失败。
              */
             String token = JwtUtil.create(userDo.getLoginName(), Constants.DEFAULT_COOKIE_TIME + (120 * 1000),
-                authProperties.getOauth2JwtSecret());
+                    authProperties.getOauth2JwtSecret());
             CookieUtil.setCookie(response, Constants.COOKIE_DATABASE_LOGIN_TOKEN, token, Constants.DEFAULT_COOKIE_TIME,
-                topDomain);
+                    topDomain);
         } catch (Exception e) {
             log.error("##### write cookie faied", e);
             return buildFailedTeslaResult("cookie write failed: " + e.getLocalizedMessage());
@@ -144,7 +144,7 @@ public class LoginController extends BaseController {
         if (langs.length == 2) {
             CookieUtil.setCookie(response, Constants.COOKIE_LANG, langs[0], Constants.DEFAULT_COOKIE_TIME, topDomain);
             CookieUtil.setCookie(response, Constants.COOKIE_COUNTRY, langs[1], Constants.DEFAULT_COOKIE_TIME,
-                topDomain);
+                    topDomain);
             teslaUserService.changeLanguage(userDo, lang);
         } else {
             log.error("Cannot write user language into cookie/db, lang split length not 2, lang={}", lang);

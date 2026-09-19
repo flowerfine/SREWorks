@@ -3,7 +3,6 @@ package com.alibaba.tesla.authproxy.web;
 import com.alibaba.tesla.authproxy.Constants;
 import com.alibaba.tesla.authproxy.lib.exceptions.*;
 import com.alibaba.tesla.authproxy.model.UserDO;
-import com.alibaba.tesla.authproxy.outbound.aas.AasClient;
 import com.alibaba.tesla.authproxy.service.PrivateAccountService;
 import com.alibaba.tesla.authproxy.service.PrivateAuthService;
 import com.alibaba.tesla.authproxy.service.PrivatePermissionService;
@@ -26,16 +25,15 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-import java.util.List;
 
 /**
  * 专有云 - 账号管理
  *
  * @author yaoxing.gyx@alibaba-inc.com
  */
+@Slf4j
 @RestController
 @RequestMapping("auth/private/account")
-@Slf4j
 public class PrivateAccountController extends PrivateBaseController {
 
     @Autowired
@@ -55,9 +53,6 @@ public class PrivateAccountController extends PrivateBaseController {
 
     @Autowired
     private AuditUtil auditUtil;
-
-    @Autowired
-    private AasClient aasClient;
 
     private Gson gson = new GsonBuilder().serializeNulls().create();
 
@@ -124,21 +119,6 @@ public class PrivateAccountController extends PrivateBaseController {
         PrivateAccountAliyunListResult result = accountService.getAliyunIdByPks(param.getAliyunPks());
         return PrivateResultBuilder.buildSuccessResult(result);
     }
-
-    ///**
-    // * 根据 aliyunPk 获取用户的 Access Keys 信息
-    // */
-    //@RequestMapping(value = "accessKeys", method = RequestMethod.GET)
-    //@ResponseBody
-    //public TeslaResult getAccessKeysByPk(@Valid @ModelAttribute PrivateAccountAccessKeysByPkParam param,
-    //                                     BindingResult bindingResult) throws AuthProxyThirdPartyError {
-    //    if (bindingResult.hasErrors()) {
-    //        return buildValidationResult(bindingResult);
-    //    }
-    //
-    //    List<ListAccessKeysForAccountResponse.AccessKey> accessKeys = aasClient.getUserAccessKeys(param.getAliyunPk());
-    //    return PrivateResultBuilder.buildSuccessResult(accessKeys);
-    //}
 
     /**
      * 用户类型获取 API

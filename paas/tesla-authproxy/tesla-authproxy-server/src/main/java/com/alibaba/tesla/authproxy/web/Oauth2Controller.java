@@ -24,14 +24,13 @@ import java.io.IOException;
  *
  * @author yaoxing.gyx@alibaba-inc.com
  */
+@Slf4j
 @Controller
 @RequestMapping("oauth2")
-@Slf4j
 public class Oauth2Controller {
 
     @Autowired
     private AliyunOauth2Util oauth2Util;
-
     @Autowired
     private AuthProperties authProperties;
 
@@ -40,6 +39,7 @@ public class Oauth2Controller {
         HttpServletResponse response,
         @RequestParam("code") String code,
         @RequestParam("state") String state) throws IOException {
+
         JsonObject stateJson = new JsonParser().parse(state).getAsJsonObject();
         AliyunAccessTokenVO token = oauth2Util.getAccessToken(code);
         log.info("Get token from aliyun, code={}, state={}, token={}", code, state, TeslaGsonUtil.toJson(token));

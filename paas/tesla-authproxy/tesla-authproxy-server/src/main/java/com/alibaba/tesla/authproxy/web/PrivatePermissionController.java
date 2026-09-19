@@ -32,22 +32,17 @@ import javax.validation.Valid;
  *
  * @author yaoxing.gyx@alibaba-inc.com
  */
+@Slf4j
 @RestController
 @RequestMapping("auth/private/permission")
-@Slf4j
 public class PrivatePermissionController extends PrivateBaseController {
 
     @Autowired
     private PrivatePermissionService permissionService;
-
     @Autowired
     private PrivateAuthService authService;
-
     @Autowired
     private AuditUtil auditUtil;
-
-    @Autowired
-    private UserRoleService userRoleService;
 
     private Gson gson = new GsonBuilder().serializeNulls().create();
 

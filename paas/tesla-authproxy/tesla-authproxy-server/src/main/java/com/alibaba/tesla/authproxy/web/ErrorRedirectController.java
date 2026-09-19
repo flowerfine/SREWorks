@@ -28,8 +28,8 @@ import java.util.Map;
  * @version 1.0
  * @date 2017年5月3日
  */
-@Controller
 @Slf4j
+@Controller
 public class ErrorRedirectController implements ErrorController {
 
     private static final String ERROR_PATH = "/error";
@@ -48,7 +48,7 @@ public class ErrorRedirectController implements ErrorController {
      * @param request
      * @param response
      */
-    @RequestMapping(value = "/error")
+    @RequestMapping(value = ERROR_PATH)
     @ResponseBody
     public void handleError(HttpServletRequest request, HttpServletResponse response) {
         Integer statusCode = (Integer) request.getAttribute("javax.servlet.error.status_code");

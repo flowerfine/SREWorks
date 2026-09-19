@@ -4,7 +4,6 @@ import com.alibaba.tesla.authproxy.BaseController;
 import com.alibaba.tesla.authproxy.Constants;
 import com.alibaba.tesla.authproxy.model.vo.TeslaRoleVO;
 import com.alibaba.tesla.authproxy.service.RoleService;
-import com.alibaba.tesla.authproxy.service.UserRoleService;
 import com.alibaba.tesla.authproxy.service.ao.*;
 import com.alibaba.tesla.authproxy.web.input.RoleGetParam;
 import com.alibaba.tesla.authproxy.web.input.RoleListParam;
@@ -35,17 +34,14 @@ import java.util.Map;
  *
  * @author yaoxing.gyx@alibaba-inc.com
  */
+@Slf4j
+@Validated
 @RestController
 @Api(tags = "角色 API", description = "角色 API")
-@Validated
-@Slf4j
 public class RoleController extends BaseController {
 
     @Autowired
     private RoleService roleService;
-
-    @Autowired
-    private UserRoleService userRoleService;
 
     @ApiOperation(value = "获取角色列表")
     @GetMapping("roles")

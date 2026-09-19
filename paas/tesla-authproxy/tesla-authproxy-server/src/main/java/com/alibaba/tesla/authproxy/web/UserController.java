@@ -52,8 +52,8 @@ import java.util.*;
 /**
  * 用户 Controller
  */
-@RestController
 @Slf4j
+@RestController
 public class UserController extends BaseController {
 
     private Gson gson = new GsonBuilder().serializeNulls().create();

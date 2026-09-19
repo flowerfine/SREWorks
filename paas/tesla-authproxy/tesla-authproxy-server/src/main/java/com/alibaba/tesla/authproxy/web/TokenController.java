@@ -11,7 +11,6 @@ import com.alibaba.tesla.authproxy.BaseController;
 import com.alibaba.tesla.authproxy.exceptions.ClientUserArgsException;
 import com.alibaba.tesla.authproxy.model.UserDO;
 import com.alibaba.tesla.authproxy.service.TeslaUserService;
-import com.alibaba.tesla.authproxy.util.AliyunOauth2Util;
 import com.alibaba.tesla.authproxy.util.TeslaJwtUtil;
 import com.alibaba.tesla.common.base.TeslaBaseResult;
 import com.alibaba.tesla.common.base.TeslaResultFactory;
@@ -30,13 +29,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
  *
  * @author yaoxing.gyx@alibaba-inc.com
  */
+@Slf4j
 @Controller
 @RequestMapping("oauth2/teslaToken")
-@Slf4j
 public class TokenController extends BaseController {
-
-    @Autowired
-    private AliyunOauth2Util oauth2Util;
 
     @Autowired
     private AuthProperties authProperties;

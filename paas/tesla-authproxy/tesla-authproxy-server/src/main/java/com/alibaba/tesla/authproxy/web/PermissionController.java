@@ -23,11 +23,11 @@ import org.springframework.web.bind.annotation.*;
  *
  * @author yaoxing.gyx@alibaba-inc.com
  */
-@RestController
-@Api(tags = "权限 API", description = "权限 API")
-@RequestMapping("permissions/{permissionId:[a-zA-Z0-9,._:\\-]+}")
-@Validated
 @Slf4j
+@Validated
+@RestController
+@RequestMapping("permissions/{permissionId:[a-zA-Z0-9,._:\\-]+}")
+@Api(tags = "权限 API", description = "权限 API")
 public class PermissionController extends BaseController {
 
     @Autowired

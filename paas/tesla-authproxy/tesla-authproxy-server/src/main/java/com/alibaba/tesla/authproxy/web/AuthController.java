@@ -1,9 +1,7 @@
 package com.alibaba.tesla.authproxy.web;
 
 import com.alibaba.fastjson.JSONObject;
-import com.alibaba.tesla.authproxy.AuthProperties;
 import com.alibaba.tesla.authproxy.model.UserDO;
-import com.alibaba.tesla.authproxy.service.TeslaUserService;
 import com.alibaba.tesla.authproxy.util.AuthUtil;
 import com.alibaba.tesla.authproxy.web.output.TeslaAuthResult;
 import com.alibaba.tesla.common.base.TeslaBaseResult;
@@ -16,20 +14,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 
-/**
- *
- */
 @Slf4j
 @Controller
 @RequestMapping("auth/tesla")
 public class AuthController {
 
     @Autowired
-    AuthUtil authUtil;
-    @Autowired
-    private AuthProperties authProperties;
-    @Autowired
-    private TeslaUserService teslaUserService;
+    private AuthUtil authUtil;
 
     /**
      * header 校验

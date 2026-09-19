@@ -26,7 +26,7 @@ import java.util.Map;
 public class ServiceMetaController extends BaseController {
 
     @Autowired
-    ServiceMetaService serviceMetaService;
+    private ServiceMetaService serviceMetaService;
 
     /**
      * 查询某个应用下所有已经开启的服务元数据（含部分开启）

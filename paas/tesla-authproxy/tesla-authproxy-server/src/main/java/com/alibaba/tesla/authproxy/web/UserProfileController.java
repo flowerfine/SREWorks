@@ -3,7 +3,6 @@ package com.alibaba.tesla.authproxy.web;
 import com.alibaba.tesla.authproxy.AuthProperties;
 import com.alibaba.tesla.authproxy.Constants;
 import com.alibaba.tesla.authproxy.model.UserDO;
-import com.alibaba.tesla.authproxy.service.SwitchViewUserService;
 import com.alibaba.tesla.authproxy.service.TeslaUserService;
 import com.alibaba.tesla.authproxy.service.ao.UserGetConditionAO;
 import com.alibaba.tesla.authproxy.service.ao.UserGetResultAO;
@@ -32,9 +31,9 @@ import javax.validation.constraints.Pattern;
  *
  * @author yaoxing.gyx@alibaba-inc.com
  */
+@Slf4j
 @RestController
 @RequestMapping("profile")
-@Slf4j
 public class UserProfileController extends BaseController {
 
     @Autowired

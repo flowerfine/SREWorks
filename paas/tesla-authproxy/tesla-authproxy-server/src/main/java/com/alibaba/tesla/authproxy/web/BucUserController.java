@@ -9,7 +9,6 @@ import java.util.Objects;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.alibaba.tesla.authproxy.AuthProperties;
 import com.alibaba.tesla.authproxy.BaseController;
 import com.alibaba.tesla.authproxy.exceptions.UnAuthorizedException;
 import com.alibaba.tesla.authproxy.model.TeslaServiceUserDO;
@@ -23,7 +22,6 @@ import com.alibaba.tesla.authproxy.service.BucUserService;
 import com.alibaba.tesla.common.base.TeslaResult;
 import com.alibaba.tesla.common.utils.TeslaResultBuilder;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -46,10 +44,6 @@ public class BucUserController extends BaseController {
     protected HttpServletRequest request;
     @Autowired
     private BucUserService bucUserService;
-    @Autowired
-    private ObjectMapper objectMapper;
-    @Autowired
-    private AuthProperties authProperties;
     @Autowired
     private TeslaServiceUserMapper teslaServiceUserMapper;
 

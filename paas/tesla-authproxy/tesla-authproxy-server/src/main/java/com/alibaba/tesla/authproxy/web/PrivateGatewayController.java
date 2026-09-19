@@ -33,20 +33,17 @@ import java.util.Arrays;
  *
  * @author yaoxing.gyx@alibaba-inc.com
  */
+@Slf4j
 @RestController
 @RequestMapping("auth/private/gateway")
-@Slf4j
 public class PrivateGatewayController extends PrivateBaseController {
 
     @Autowired
     private LocaleUtil locale;
-
     @Autowired
     private PrivateSmsService privateSmsService;
-
     @Autowired
     private PrivateAuthService authService;
-
     @Autowired
     private AuditUtil auditUtil;
 

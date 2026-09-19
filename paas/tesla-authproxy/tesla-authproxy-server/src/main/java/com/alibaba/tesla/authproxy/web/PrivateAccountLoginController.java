@@ -48,20 +48,17 @@ import java.util.Objects;
  *
  * @author yaoxing.gyx@alibaba-inc.com
  */
+@Slf4j
 @RestController
 @RequestMapping("auth/private/account/login")
-@Slf4j
 public class PrivateAccountLoginController extends PrivateBaseController {
 
     @Autowired
     private PrivateAccountService accountService;
-
     @Autowired
     private AuthProperties authProperties;
-
     @Autowired
     private TeslaUserService teslaUserService;
-
     @Autowired
     private AuditUtil auditUtil;
 

@@ -48,10 +48,10 @@ import java.util.Objects;
  *
  * @author tandong.td@alibaba-inc.com yaoxing.gyx@alibaba-inc.com
  */
+@Slf4j
 @RestController
 @ControllerAdvice
 @Order(Ordered.HIGHEST_PRECEDENCE)
-@Slf4j
 public class GlobalControllerExceptionHandler extends BaseController {
 
     /**

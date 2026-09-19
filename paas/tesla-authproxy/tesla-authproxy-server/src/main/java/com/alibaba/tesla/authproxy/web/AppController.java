@@ -30,10 +30,9 @@ import java.util.Date;
 public class AppController extends BaseController {
 
     @Autowired
-    TeslaAppService teslaAppService;
-
+    private TeslaAppService teslaAppService;
     @Autowired
-    AppExtService appExtService;
+    private AppExtService appExtService;
 
     /**
      * 校验APP的AK信息是否合法 x-auth-app'/'x-auth-key

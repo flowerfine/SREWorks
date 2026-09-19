@@ -46,10 +46,8 @@ public class PermissionCheckController extends BaseController {
      */
     @Autowired
     private PermissionResService permissionResService;
-
     @Autowired
     private AppExtService appExtService;
-
     @Autowired
     private AuthProperties authProperties;
 

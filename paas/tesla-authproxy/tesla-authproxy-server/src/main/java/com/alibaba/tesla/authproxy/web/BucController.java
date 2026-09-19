@@ -11,8 +11,6 @@ import com.alibaba.tesla.authproxy.AuthProperties;
 import com.alibaba.tesla.authproxy.BaseController;
 import com.alibaba.tesla.authproxy.constants.AuthProxyConstants;
 import com.alibaba.tesla.authproxy.model.UserDO;
-import com.alibaba.tesla.authproxy.service.TeslaUserService;
-import com.alibaba.tesla.authproxy.service.UserService;
 import com.alibaba.tesla.authproxy.util.CookieUtil;
 import com.alibaba.tesla.common.base.TeslaBaseResult;
 import com.alibaba.tesla.common.base.TeslaResultFactory;
@@ -41,23 +39,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * @version 1.0
  * @date 2017年5月3日
  */
+@Slf4j
 @Controller
 @RequestMapping("auth/buc")
-@Slf4j
 public class BucController extends BaseController {
 
     private static final String ORIGIN_BACK_URL_KEY = "origin_back_url";
-    private static final int JWT_TOKEN_TIMEOUT = 86400000;
 
     @Autowired
     private AuthProperties authProperties;
-
-    @Autowired
-    private TeslaUserService teslaUserService;
-
-    @Autowired
-    private UserService userService;
-
 
     @RequestMapping("/login")
     @ResponseBody
