@@ -25,8 +25,11 @@ public class TeslaGatewayMetric {
     private MeterRegistry meterRegistry;
 
     public void httpErrorRecord(HttpStatus status, String path, String xEnv) {
-        Tags tags = Tags.of("httpCode", String.valueOf(status.value()), "httpStatus", status.getReasonPhrase(), "path",
-            path, "x-env", xEnv);
+        Tags tags = Tags.of(
+                "httpCode", String.valueOf(status.value()),
+                "httpStatus", status.getReasonPhrase(),
+                "path", path,
+                "x-env", xEnv);
         meterRegistry.counter(REQUEST_ERROR_TOTAL, tags).increment();
     }
 
@@ -43,10 +46,12 @@ public class TeslaGatewayMetric {
      * header校验失败记录
      */
     public void headerCheckError(String path, String remoteInfo, AuthErrorTypeEnum errorType, String requestId) {
-        Tags tags = Tags.of("path", path, "remoteInfo", remoteInfo, "errorType",
-            errorType.name(), "requestId", requestId);
+        Tags tags = Tags.of(
+                "path", path,
+                "remoteInfo", remoteInfo,
+                "errorType", errorType.name(),
+                "requestId", requestId);
         meterRegistry.counter(HEADER_AUTH_ERROR_TOTAL, tags).increment();
-
     }
 
     /**

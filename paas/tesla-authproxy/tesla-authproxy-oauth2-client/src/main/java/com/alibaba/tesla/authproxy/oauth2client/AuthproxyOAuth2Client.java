@@ -35,14 +35,15 @@ import org.springframework.stereotype.Component;
 @Component
 public class AuthproxyOAuth2Client {
 
+    private final static String OAUTH2_TOKEN_URL = "/v2/common/authProxy/oauth/token";
+    private final static String OAUTH2_ADMIN_TOKEN_URL = "/authproxy/oauth2/teslaToken";
+
     @Autowired
     private AuthproxyOauth2ClientProperties authproxyOauth2ClientProperties;
     @Autowired
     private ObjectMapper objectMapper;
 
-    private ConcurrentHashMap<String, TeslaOauth2TokenDTO> tokenMap = new ConcurrentHashMap();
-    private final static String OAUTH2_TOKEN_URL = "/v2/common/authProxy/oauth/token";
-    private final static String OAUTH2_ADMIN_TOKEN_URL = "/authproxy/oauth2/teslaToken";
+    private ConcurrentHashMap<String, TeslaOauth2TokenDTO> tokenMap = new ConcurrentHashMap<>();
 
     /**
      * 从已认证请求头中获取tesla用户信息

@@ -7,7 +7,6 @@ import org.springframework.cloud.gateway.support.tagsprovider.GatewayTagsProvide
 import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
 
-
 /**
  * tesla gateway metric
  * @author qiuqiang.qq@alibaba-inc.com
@@ -17,7 +16,6 @@ public class TeslaGatewayRouteTagsProvider implements GatewayTagsProvider {
 
     @Autowired
     private TeslaServerRequestUtil teslaServerRequestUtil;
-
 
     @Override
     public Tags apply(ServerWebExchange exchange) {

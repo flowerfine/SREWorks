@@ -34,13 +34,13 @@ public class DateTimeUtil {
     }
 
     public static String getCurrentDate() {
-        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat df = new SimpleDateFormat(DATE_FORMAT1);
         return df.format(new Date());
     }
 
     public static String getCurrentDate(String format) {
         if (StringUtils.isEmpty(format)) {
-            format = "yyyy-MM-dd HH:mm:ss";
+            format = DATE_TIME_FORMAT1;
         }
 
         SimpleDateFormat df = new SimpleDateFormat(format);
@@ -48,13 +48,13 @@ public class DateTimeUtil {
     }
 
     public static String getCurrentDateTime() {
-        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat df = new SimpleDateFormat(DATE_TIME_FORMAT1);
         return df.format(new Date());
     }
 
     public static String getCurrentDateTime(String format) {
         if (StringUtils.isEmpty(format)) {
-            format = "yyyy-MM-dd HH:mm:ss";
+            format = DATE_TIME_FORMAT1;
         }
 
         SimpleDateFormat df = new SimpleDateFormat(format);
@@ -66,7 +66,7 @@ public class DateTimeUtil {
             return null;
         } else {
             if (StringUtils.isEmpty(format)) {
-                format = "yyyy-MM-dd HH:mm:ss";
+                format = DATE_TIME_FORMAT1;
             }
 
             SimpleDateFormat df = new SimpleDateFormat(format);
@@ -78,14 +78,14 @@ public class DateTimeUtil {
         if (null == date) {
             return null;
         } else {
-            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            SimpleDateFormat df = new SimpleDateFormat(DATE_TIME_FORMAT1);
             return df.format(date);
         }
     }
 
     public static Date string2Date(String date, String format) {
         if (StringUtils.isEmpty(format)) {
-            format = "yyyy-MM-dd HH:mm:ss";
+            format = DATE_TIME_FORMAT1;
         }
 
         SimpleDateFormat df = new SimpleDateFormat(format);
@@ -99,7 +99,7 @@ public class DateTimeUtil {
     }
 
     public static Date string2Date(String date) {
-        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat df = new SimpleDateFormat(DATE_TIME_FORMAT1);
 
         try {
             return df.parse(date);
@@ -111,7 +111,7 @@ public class DateTimeUtil {
 
     public static long getTimeInMillis(String dateTime) {
         long ret = 0L;
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(DATE_TIME_FORMAT1);
 
         try {
             ret = simpleDateFormat.parse(dateTime).getTime();
@@ -194,7 +194,7 @@ public class DateTimeUtil {
         curren += (long)(min * 60 * 1000);
         Date date = new Date(curren);
         if (null == format || format.length() == 0) {
-            format = "yyyy-MM-dd HH:mm:ss";
+            format = DATE_TIME_FORMAT1;
         }
 
         return date2String(date, format);
@@ -202,7 +202,7 @@ public class DateTimeUtil {
 
     public static String getBeforDayDateTime(String format, int befor) {
         if (null == format || format.length() == 0) {
-            format = "yyyy-MM-dd HH:mm:ss";
+            format = DATE_TIME_FORMAT1;
         }
 
         Date dNow = new Date();
