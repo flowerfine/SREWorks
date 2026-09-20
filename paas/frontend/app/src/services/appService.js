@@ -276,8 +276,6 @@ class AppService {
   }
 
   getAllProfile(params) {
-    // console.log(props.home);
-    //http://frontend.ca221ae8860d9421688e59c8ab45c8b21.cn-hangzhou.alicontainer.com/gateway/v2/foundation/appmanager/instances?namespaceId=default&stageId=dev&visit=true&pagination=false
     const { stageId, visit } = params
     return httpClient
       .get('gateway/v2/foundation/appmanager/realtime/app-instances', {
@@ -333,9 +331,6 @@ class AppService {
                 return includesIndex.includes(item.id)
               })
             })
-            // if (workspaces[0].items.length === 0) {
-            //     alert(JSON.stringify(workspaces[0].items));
-            // }
             //过滤掉没有权限的应用
             profile.collectList = collectList.filter((item) => {
               return includesIndex.includes(item.id)
@@ -354,7 +349,7 @@ class AppService {
     )
   }
   isLogined() {
-    return httpClient.get('gateway/v2/common/authProxy/auth/user/info')
+    return httpClient.get(authPrefix + '/auth/user/info')
   }
   // // 更新桌面背景图片列表
   updateDesktopBackgroundList(params) {
@@ -380,7 +375,6 @@ export default new AppService()
 /**
  *定义些应用级别的设置对象
  */
-
 export class ApplicationSetting {
   constructor(settingsData) {
     this.products = settingsData.products

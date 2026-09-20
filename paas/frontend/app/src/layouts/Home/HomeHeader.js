@@ -7,7 +7,6 @@ import { SiderNavToggleBar } from '@sreworks/framework'
 import { connect } from 'dva'
 import DropDownUser from './DropDownUser'
 import properties from '../../properties'
-// let properties = window.PROPERTY
 @connect(({ home, global }) => ({
   home: home,
   global: global,

@@ -18,17 +18,6 @@ const Item = Menu.Item
 const MenuItemGroup = Menu.ItemGroup
 
 const ModuleMenu = ({ currentModule, moduleData }) => {
-  // let keys=[currentModule.name];
-  // //需要对弹出菜单做选中样式适配
-  // if(currentModule.layout==='popup'&&currentModule.children&&currentModule.children.length){
-  //     keys.push(currentModule.path);
-  //     let cPath=window.location.hash;
-  //     currentModule.children.forEach(c=>{
-  //         if(cPath.indexOf(c.path)>=0){
-  //             keys.push(c.path);
-  //         }
-  //     })
-  // }
   let keys = [currentModule.name]
   //顶部模块级别的菜单隐藏选中方式
   let { selectPathInHidden, hidden } = currentModule.config || {}

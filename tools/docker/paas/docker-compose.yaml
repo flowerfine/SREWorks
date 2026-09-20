@@ -313,6 +313,26 @@ services:
     networks:
       - appmanager
 
+  flycore-paas-action-paas-action:
+    image: sreworks-registry.cn-beijing.cr.aliyuncs.com/hub/flycore-paas-action-paas-action:1685142711343
+    container_name: flycore-paas-action-paas-action
+    depends_on:
+      mysql:
+        condition: service_healthy
+    environment:
+      DB_HOST: mysql
+      DB_PORT: 3306
+      DB_USER: root
+      DB_PASSWORD: 123456
+      DB_NAME: abm_paas_action2
+      ENDPOINT_PAAS_HOME: appmanager:7001
+      ENDPOINT_PAAS_TKGONE: xxx
+      URL_PAAS_HOME: http://appmanager:7001
+    ports:
+      - 7007:7001
+    networks:
+      - appmanager
+
   flycore-paas-frontend-route-config:
     image: sreworks-registry.cn-beijing.cr.aliyuncs.com/hub/flycore-paas-frontend-route-config:1692362620981
     container_name: flycore-paas-frontend-route-config
@@ -340,6 +360,7 @@ services:
       ENDPOINT_PAAS_APPMANAGER: appmanager:7001
       ENDPOINT_PAAS_AUTHPROXY: flycore-paas-authproxy-paas-authproxy:7001
       ENDPOINT_PAAS_GATEWAY: http://flycore-paas-gateway-paas-gateway:7001
+      ENDPOINT_PAAS_ACTION: flycore-paas-action-paas-action:7001
       ENDPOINT_PAAS_MINIO: minio:9000
       ENV_TYPE: Standalone
       PLATFORM_NAME: SREWorks
