@@ -1,17 +1,13 @@
 package com.alibaba.sreworks.flyadmin.server.controllers;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-
-import javax.servlet.http.HttpServletRequest;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.sreworks.common.util.JsonUtil;
 import com.alibaba.sreworks.common.util.RegularUtil;
-import com.alibaba.sreworks.domain.repository.AppRepository;
 import com.alibaba.sreworks.flyadmin.server.DTO.FlyadminAuthproxyCreateUserParam;
 import com.alibaba.sreworks.flyadmin.server.DTO.FlyadminAuthproxyModifyUserParam;
 import com.alibaba.sreworks.flyadmin.server.services.FlyadminAuthproxyUserRoleService;
@@ -43,9 +39,6 @@ public class FlyadminAuthproxyController extends BaseController {
 
     @Autowired
     FlyadminAuthproxyUserRoleService flyadminAuthproxyUserRoleService;
-
-    @Autowired
-    AppRepository appRepository;
 
     @ApiOperation(value = "getUser")
     @RequestMapping(value = "getUser", method = RequestMethod.GET)

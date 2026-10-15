@@ -6,7 +6,6 @@ import java.util.stream.Collectors;
 
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.sreworks.common.util.JsonUtil;
-import com.alibaba.sreworks.domain.repository.ClusterRepository;
 import com.alibaba.sreworks.flyadmin.server.DTO.PluginCluster;
 import com.alibaba.sreworks.flyadmin.server.services.PluginClusterService;
 import com.alibaba.tesla.common.base.TeslaBaseResult;
@@ -29,9 +28,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/plugin/cluster")
 @Api(tags = "插件-集群")
 public class PluginClusterController extends BaseController {
-
-    @Autowired
-    ClusterRepository clusterRepository;
 
     @Autowired
     PluginClusterService pluginClusterService;

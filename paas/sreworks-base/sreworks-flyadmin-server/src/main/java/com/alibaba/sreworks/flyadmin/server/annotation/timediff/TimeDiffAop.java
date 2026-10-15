@@ -19,10 +19,11 @@ import org.springframework.stereotype.Component;
  *
  * @author yangjinghua
  */
+@Slf4j
 @Aspect
 @Component
-@Slf4j
 public class TimeDiffAop extends BasicAop {
+
     ThreadLocal<Long> time = new ThreadLocal<>();
 
     @Before("@annotation(com.alibaba.sreworks.flyadmin.server.annotation.timediff.TimeDiff)")

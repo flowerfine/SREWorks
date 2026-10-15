@@ -15,9 +15,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @ControllerAdvice
 public class SreworksExceptionHandler {
 
-    public SreworksExceptionHandler() {
-    }
-
     @ExceptionHandler({ApiException.class})
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ResponseBody
