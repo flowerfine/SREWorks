@@ -142,7 +142,6 @@ public class ActionStatusService implements InitializingBean {
         log.info("---flow data: {}", flowData);
         String status = getFlowStatus((Integer) flowData.get("state"));
         log.info("---flow status; {}", status);
-        return;
     }
 
 

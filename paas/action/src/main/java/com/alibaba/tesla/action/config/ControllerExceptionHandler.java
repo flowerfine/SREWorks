@@ -22,14 +22,12 @@ import javax.servlet.http.HttpServletRequest;
  *
  * @author yaoxing.gyx@alibaba-inc.com
  */
-@ControllerAdvice(
-    annotations = {RestController.class, Controller.class}
-)
-@Order(Ordered.HIGHEST_PRECEDENCE)
 @Slf4j
+@Order(Ordered.HIGHEST_PRECEDENCE)
+@ControllerAdvice(annotations = {RestController.class, Controller.class})
 public class ControllerExceptionHandler extends ResponseEntityExceptionHandler {
 
-    @ExceptionHandler({Exception.class})
+    @ExceptionHandler(Exception.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ResponseBody
     protected TeslaBaseResult exceptionHandler(Exception exception, HttpServletRequest request) {

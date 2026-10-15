@@ -82,7 +82,6 @@ public class NodeController extends BaseController {
     @Transactional(rollbackOn = Exception.class)
     @PostMapping(value = "/clone")
     public TeslaBaseResult clone(@RequestBody NodeCloneParam param, String stageId) {
-//        ProductopsNode sourceNode = nodeService.getNode(param.getSourceNodeTypePath(), stageId);
         ProductopsNode node = nodeService.getNode(param.getTargetNodeTypePath(), stageId);
 
         ProductopsTab sourceTab = productopsTabRepository.findFirstByNodeTypePathAndStageId(param.getSourceNodeTypePath(), stageId);
@@ -202,16 +201,12 @@ public class NodeController extends BaseController {
         productopsElementRepository.saveAll(newElements);
         productopsElementRepository.flush();
 
-
         return buildSucceedResult(node);
-
-
     }
 
     @PostMapping(value = "/structure")
     public TeslaBaseResult post(@RequestBody NodeInsertParam param, String stageId) {
-
-        log.debug("POST: " + JSONObject.toJSONString(param));
+        log.debug("POST: {}", JSONObject.toJSONString(param));
         String nodeTypePath = getNodeTypePath(param);
 
         String appId = nodeTypePath.split("\\|")[0];
@@ -240,7 +235,7 @@ public class NodeController extends BaseController {
     @PutMapping(value = "/structure")
     public TeslaBaseResult put(@RequestBody NodeUpdateParam param, String stageId) {
         if (log.isDebugEnabled()) {
-            log.debug("PUT: " + JSONObject.toJSONString(param));
+            log.debug("PUT: {}", JSONObject.toJSONString(param));
         }
         String[] words = param.getNodeTypePath().split(":");
         String serviceType = words[words.length - 1];

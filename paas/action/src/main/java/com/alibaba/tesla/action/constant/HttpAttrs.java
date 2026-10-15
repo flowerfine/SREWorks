@@ -6,7 +6,6 @@ package com.alibaba.tesla.action.constant;
  * @author dongdong.ldd@alibaba-inc.com
  * Created by adonis on 15/11/2017.
  */
-
 public class HttpAttrs {
     public static final String USER_NAME = "userName";
     public static final String CLIENT_IP = "clientIP";

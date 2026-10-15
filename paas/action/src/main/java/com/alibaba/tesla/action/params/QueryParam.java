@@ -3,12 +3,10 @@ package com.alibaba.tesla.action.params;
 import lombok.Data;
 import org.springframework.stereotype.Component;
 
-
 /**
  * @author huibang.lhb@alibaba-inc.com
  * Created by xunyan on 03/01/2019.
  */
-
 @Data
 @Component
 public class QueryParam {
@@ -36,6 +34,4 @@ public class QueryParam {
     private String empld;
 
     private Long actionId;
-
-
 }

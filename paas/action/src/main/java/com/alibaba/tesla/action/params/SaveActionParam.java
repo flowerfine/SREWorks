@@ -7,12 +7,10 @@ import org.springframework.stereotype.Component;
 
 import javax.validation.constraints.NotNull;
 
-
 /**
  * @author huibang.lhb@alibaba-inc.com
  * Created by xunyan on 03/01/2019.
  */
-
 @Data
 @Component
 public class SaveActionParam {
@@ -58,6 +56,5 @@ public class SaveActionParam {
     private String status;
 
     private String role;
-
 
 }

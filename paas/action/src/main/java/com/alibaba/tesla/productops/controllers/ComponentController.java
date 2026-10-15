@@ -28,7 +28,6 @@ public class ComponentController extends BaseController {
 
     @GetMapping(value = "/list")
     public TeslaBaseResult get(String stageId) {
-
         return buildSucceedResult(
                 productopsComponentRepository.findAllByStageId(stageId).stream().
                 map(ProductopsComponent::toJSONObject).collect(Collectors.toList())
@@ -37,9 +36,7 @@ public class ComponentController extends BaseController {
 
     @PostMapping(value = "/create")
     public TeslaBaseResult post(@RequestBody ComponentInsertParam param, String stageId) {
-
-        log.debug("POST: " + JSONObject.toJSONString(param));
-
+        log.debug("POST: {}", JSONObject.toJSONString(param));
         if(!StringUtil.isEmpty(param.getStageId())){
             stageId = param.getStageId();
         }
@@ -64,9 +61,7 @@ public class ComponentController extends BaseController {
 
     @PutMapping(value = "/update")
     public TeslaBaseResult put(@RequestBody ComponentUpdateParam param, String stageId) {
-
-        log.debug("PUT: " + JSONObject.toJSONString(param));
-
+        log.debug("PUT: {}", JSONObject.toJSONString(param));
         if(!StringUtil.isEmpty(param.getStageId())){
             stageId = param.getStageId();
         }
@@ -90,7 +85,6 @@ public class ComponentController extends BaseController {
 
     @DeleteMapping(value = "/delete")
     public TeslaBaseResult delete(@RequestBody ComponentDeleteParam param, String stageId) {
-
         if(!StringUtil.isEmpty(param.getStageId())){
             stageId = param.getStageId();
         }
@@ -98,7 +92,5 @@ public class ComponentController extends BaseController {
 
         return buildSucceedResult(productopsComponentRepository.deleteByComponentIdAndStageId(param.getComponentId(), stageId));
     }
-
-
 
 }

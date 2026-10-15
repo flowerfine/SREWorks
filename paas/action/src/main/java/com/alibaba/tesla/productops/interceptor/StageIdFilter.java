@@ -25,8 +25,6 @@ public class StageIdFilter implements Filter {
         // 这里将原始request传入，读出流并存储
         ServletRequest request = new MyHttpServletRequest(httpServletRequest);
         // 这里将原始request替换为包装后的request，此后所有进入controller的request均为包装后的
-        filterChain.doFilter(request, servletResponse);//
-
+        filterChain.doFilter(request, servletResponse);
     }
-
 }

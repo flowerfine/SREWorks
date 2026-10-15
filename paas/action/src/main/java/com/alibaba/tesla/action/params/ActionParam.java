@@ -6,12 +6,10 @@ import org.hibernate.validator.constraints.NotBlank;
 
 import javax.validation.constraints.NotNull;
 
-
 /**
  * @author huibang.lhb@alibaba-inc.com
  * Created by xunyan on 03/01/2019.
  */
-
 @Data
 public class ActionParam{
 

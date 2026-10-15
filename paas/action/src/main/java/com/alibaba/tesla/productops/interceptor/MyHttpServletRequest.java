@@ -26,7 +26,6 @@ public class MyHttpServletRequest extends HttpServletRequestWrapper {
         if (!params.containsKey("stageId")) {
             params.put("stageId", new String[] {"prod"});
         }
-
     }
 
     @Override

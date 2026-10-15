@@ -1,9 +1,5 @@
 package com.alibaba.tesla.productops.controllers;
 
-import java.util.Arrays;
-
-import javax.servlet.http.HttpServletRequest;
-
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.tesla.action.common.TeslaBaseResult;
 import com.alibaba.tesla.action.controller.BaseController;

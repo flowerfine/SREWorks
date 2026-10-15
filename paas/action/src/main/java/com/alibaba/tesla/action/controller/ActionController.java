@@ -18,17 +18,15 @@ import javax.servlet.http.HttpServletRequest;
 import static com.alibaba.tesla.action.common.TeslaResultFactory.buildResult;
 import static com.alibaba.tesla.action.common.TeslaResultFactory.buildSucceedResult;
 
-
 /**
  * @program: tesla-frontend-service
  * @description:
  * @author: huibang.lhb
  * @create: 2019-03-27 11:34
  **/
-
+@Slf4j
 @RestController
 @RequestMapping("action")
-@Slf4j
 public class ActionController {
 
     @Autowired
@@ -36,9 +34,6 @@ public class ActionController {
 
     @Autowired
     ActionStatusService actionStatusService;
-
-    @Autowired
-    SaveActionParam saveActionParam;
 
     @RequestMapping(value = "/run", method = {RequestMethod.POST})
     public TeslaBaseResult runAction (
