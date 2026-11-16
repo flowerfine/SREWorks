@@ -14,7 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -31,7 +30,6 @@ public class SyncController extends BaseController {
     private SyncService syncService;
 
     @PostMapping("/users")
-    @ResponseBody
     public TeslaResult syncUsers(@RequestBody TeslaServiceUserDO teslaServiceUserDO) {
         TeslaServiceUserExample example = new TeslaServiceUserExample();
         example.setOrderByClause("userid desc");
@@ -45,7 +43,6 @@ public class SyncController extends BaseController {
     }
 
     @PostMapping("/apps")
-    @ResponseBody
     public TeslaResult syncApps(@RequestBody TeslaServiceExtAppDO teslaServiceExtAppDO) {
         TeslaServiceExtAppExample teslaServiceExtAppExample = new TeslaServiceExtAppExample();
         TeslaServiceExtAppExample.Criteria criteria = teslaServiceExtAppExample.createCriteria();

@@ -2,7 +2,6 @@ package com.alibaba.tesla.authproxy.service;
 
 import com.alibaba.tesla.authproxy.ApplicationException;
 import com.alibaba.tesla.authproxy.model.MenuDO;
-import com.alibaba.tesla.authproxy.model.vo.MenuDoTreeVO;
 
 import java.util.List;
 import java.util.Map;
@@ -30,46 +29,6 @@ public interface TeslaMenuService {
      */
     @Deprecated
     void initMenuByApp(String appId, long userId, List<MenuDO> menus) throws ApplicationException;
-
-    /**
-     * 初始化应用下菜单并授权所有菜单给默认角色
-     *
-     * @param appId
-     * @param userId
-     * @param menus
-     * @throws ApplicationException
-     */
-    void initMenuByAppNew(String appId, long userId, List<MenuDO> menus) throws ApplicationException;
-
-    /**
-     * 根据用户ID，加载用户有权的菜单数据，返回一个树形多级结构菜单数据
-     *
-     * @param userId 用户ID
-     * @param appId  应用ID
-     * @return
-     * @throws ApplicationException
-     */
-    List<MenuDoTreeVO> listMenuByUser(long userId, String appId) throws ApplicationException;
-
-
-    /**
-     * 根据当前用户的角色加载菜单数据，有多个角色的用户取菜单数据并集
-     *
-     * @param roleNames 用户拥有的角色名称集合
-     * @param appId     应用ID
-     * @return
-     * @throws ApplicationException
-     */
-    List<MenuDoTreeVO> listMenuByRole(List<String> roleNames, String appId) throws ApplicationException;
-
-    /**
-     * 加载某个应用下的所有菜单
-     *
-     * @param appId
-     * @return
-     * @throws ApplicationException
-     */
-    List<MenuDoTreeVO> listMenuByApp(String appId) throws ApplicationException;
 
     /**
      * 添加新的菜单

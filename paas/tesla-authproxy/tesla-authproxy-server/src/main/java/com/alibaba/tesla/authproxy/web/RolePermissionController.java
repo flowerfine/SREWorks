@@ -39,7 +39,6 @@ public class RolePermissionController extends BaseController {
 
     @ApiOperation(value = "获取指定角色的权限列表")
     @GetMapping
-    @ResponseBody
     public TeslaBaseResult getRolePermissions(
         @ApiParam("租户 ID")
         @NotEmpty
@@ -68,7 +67,6 @@ public class RolePermissionController extends BaseController {
 
     @ApiOperation(value = "为指定角色增加权限")
     @PostMapping(value = "{permissionId:[a-zA-Z0-9,.*_:\\-|]+}")
-    @ResponseBody
     public TeslaBaseResult addRolePermission(
         @ApiParam("租户 ID")
         @NotEmpty
@@ -99,7 +97,6 @@ public class RolePermissionController extends BaseController {
 
     @ApiOperation(value = "为指定角色删除权限")
     @DeleteMapping(value = "{permissionId:[a-zA-Z0-9,.*_:\\-|]+}")
-    @ResponseBody
     public TeslaBaseResult delRolePermission(
         @ApiParam("租户 ID")
         @NotEmpty

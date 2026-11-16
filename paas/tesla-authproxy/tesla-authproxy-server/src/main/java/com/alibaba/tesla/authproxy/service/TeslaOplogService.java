@@ -21,6 +21,6 @@ public interface TeslaOplogService {
      * @return
      * @throws ApplicationException
      */
-    public int insert(OplogDO oplogDo) throws ApplicationException;
+    int insert(OplogDO oplogDo) throws ApplicationException;
 
 }

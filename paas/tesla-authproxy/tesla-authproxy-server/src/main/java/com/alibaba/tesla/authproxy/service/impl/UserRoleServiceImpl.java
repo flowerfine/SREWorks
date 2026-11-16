@@ -23,8 +23,6 @@ import java.util.stream.Collectors;
 @Slf4j
 public class UserRoleServiceImpl implements UserRoleService {
 
-    private static final String LOG_PRE = "[" + UserRoleServiceImpl.class.getSimpleName() + "] ";
-
     @Autowired
     private UserRoleRelMapper userRoleRelMapper;
 

@@ -1,6 +1,5 @@
 package com.alibaba.tesla.authproxy.web;
 
-import com.alibaba.tesla.authproxy.model.mapper.UserMapper;
 import com.alibaba.tesla.authproxy.model.PermissionMetaDO;
 import com.alibaba.tesla.authproxy.model.PermissionResDO;
 import com.alibaba.tesla.authproxy.service.PermissionMetaService;
@@ -39,13 +38,10 @@ public class PermissionResController extends BaseController {
      * 权限资源服务接口
      */
     @Autowired
-    PermissionResService permissionResService;
+    private PermissionResService permissionResService;
 
     @Autowired
-    PermissionMetaService permissionMetaService;
-
-    @Autowired
-    UserMapper userMapper;
+    private PermissionMetaService permissionMetaService;
 
     /**
      * 分页查询应用已经开通的服务下的权限元数据

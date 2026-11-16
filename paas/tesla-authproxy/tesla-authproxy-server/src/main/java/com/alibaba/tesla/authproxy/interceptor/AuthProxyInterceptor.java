@@ -26,6 +26,8 @@ import javax.servlet.http.HttpServletResponse;
 @Component("authProxyInterceptor")
 public class AuthProxyInterceptor implements HandlerInterceptor {
 
+    private static AntPathMatcher pathMatcher = new AntPathMatcher();
+
     @Autowired
     private AuthPolicy authPolicy;
 
@@ -51,8 +53,6 @@ public class AuthProxyInterceptor implements HandlerInterceptor {
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler,
                                 Exception ex) {}
-
-    private static AntPathMatcher pathMatcher = new AntPathMatcher();
 
     /**
      * 过滤不拦截的请求path

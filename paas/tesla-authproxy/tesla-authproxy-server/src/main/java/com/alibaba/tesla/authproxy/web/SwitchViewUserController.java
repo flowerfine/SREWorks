@@ -12,7 +12,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,12 +20,10 @@ import java.util.List;
 
 /**
  * 切换身份的用户列表维护 Controller
- *
- * @author yaoxing.gyx@alibaba-inc.com
  */
-@Controller
-@RequestMapping("switchView/users")
 @Slf4j
+@RestController
+@RequestMapping("switchView/users")
 public class SwitchViewUserController extends BaseController {
 
     @Autowired
@@ -37,11 +34,8 @@ public class SwitchViewUserController extends BaseController {
 
     /**
      * 获取全量的白名单用户
-     *
-     * @return
      */
     @GetMapping
-    @ResponseBody
     public TeslaBaseResult getUsers() {
         List<SwitchViewUserDO> users = switchViewUserService.select();
         return TeslaResultFactory.buildSucceedResult(users);
@@ -50,8 +44,7 @@ public class SwitchViewUserController extends BaseController {
     /**
      * 获取指定用户的信息
      */
-    @GetMapping(value = "{empId}")
-    @ResponseBody
+    @GetMapping("{empId}")
     public TeslaBaseResult getUser(@PathVariable("empId") String empId,
                                    @RequestParam("switchEmpId") String switchEmpId) throws Exception {
         SwitchViewUserDO user = switchViewUserService.getByEmpId(empId);
@@ -72,11 +65,8 @@ public class SwitchViewUserController extends BaseController {
 
     /**
      * 增加白名单用户
-     *
-     * @return
      */
     @PostMapping
-    @ResponseBody
     public TeslaBaseResult addUser(@Valid @RequestBody SwitchViewUserParam param,
                                    BindingResult bindingResult) throws Exception {
         if (bindingResult.hasErrors()) {
@@ -88,11 +78,8 @@ public class SwitchViewUserController extends BaseController {
 
     /**
      * 删除白名单用户
-     *
-     * @return
      */
-    @DeleteMapping(value = "{empId}")
-    @ResponseBody
+    @DeleteMapping("{empId}")
     public TeslaBaseResult deleteUser(@PathVariable("empId") String empId) throws Exception {
         switchViewUserService.deleteUser(empId);
         return TeslaResultFactory.buildSucceedResult();

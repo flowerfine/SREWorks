@@ -31,9 +31,6 @@ public class AuthUtil {
     private AppExtMapper appExtMapper;
 
     @Autowired
-    private UserMapper userMapper;
-
-    @Autowired
     private TeslaUserService teslaUserService;
 
     private static String getPasswdHash(String username, String password)

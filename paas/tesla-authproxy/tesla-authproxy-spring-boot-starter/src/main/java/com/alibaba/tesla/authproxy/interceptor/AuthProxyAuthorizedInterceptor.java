@@ -7,8 +7,6 @@ import com.alibaba.tesla.authproxy.api.dto.TeslaUserInfoDo;
 import com.alibaba.tesla.authproxy.api.exception.AuthProxyUnauthorizedException;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -25,8 +23,6 @@ import java.util.Map;
 @ConditionalOnClass(AuthProxyClient.class)
 @EnableConfigurationProperties(AuthProxyClientProperties.class)
 public class AuthProxyAuthorizedInterceptor extends HandlerInterceptorAdapter {
-
-    private static final Logger logger = LoggerFactory.getLogger(AuthProxyAuthorizedInterceptor.class);
 
     @Autowired
     private AuthProxyClient client;

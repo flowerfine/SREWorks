@@ -13,8 +13,8 @@ import org.springframework.security.oauth2.common.OAuth2AccessToken;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 
-@ControllerAdvice
 @Slf4j
+@ControllerAdvice
 public class TeslaOAuth2ReponseAdvice implements ResponseBodyAdvice<Object> {
 
     private static final String LOG_PRE = "[" + TeslaOAuth2ReponseAdvice.class.getSimpleName() + "] ";

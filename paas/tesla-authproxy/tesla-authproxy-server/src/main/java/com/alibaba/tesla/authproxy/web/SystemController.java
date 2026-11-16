@@ -26,8 +26,8 @@ import java.util.Map;
 /**
  * 系统维护 Controller
  */
-@RestController
 @Slf4j
+@RestController
 public class SystemController extends BaseController {
 
     @Autowired

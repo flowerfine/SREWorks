@@ -5,7 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -16,13 +15,11 @@ import java.util.List;
  *
  * @author yaoxing.gyx@alibaba-inc.com
  */
-@Slf4j
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class TraitDefinition implements Serializable {
-
     private static final long serialVersionUID = 7095150105558418313L;
 
     /**
@@ -53,7 +50,6 @@ public class TraitDefinition implements Serializable {
     @NoArgsConstructor
     @AllArgsConstructor
     public static class MetaData implements Serializable {
-
         private static final long serialVersionUID = -3040036214175436386L;
 
         private String name;
@@ -70,7 +66,6 @@ public class TraitDefinition implements Serializable {
     @NoArgsConstructor
     @AllArgsConstructor
     public static class Spec implements Serializable {
-
         private static final long serialVersionUID = -1592974598970779373L;
 
         private List<String> appliesToWorkloads;
@@ -96,7 +91,6 @@ public class TraitDefinition implements Serializable {
     @NoArgsConstructor
     @AllArgsConstructor
     public static class SpecDefinitionRef implements Serializable {
-
         private static final long serialVersionUID = -6624030971546732668L;
 
         private String name;
@@ -107,7 +101,6 @@ public class TraitDefinition implements Serializable {
     @NoArgsConstructor
     @AllArgsConstructor
     public static class DataOutput implements Serializable {
-
         private static final long serialVersionUID = 2150471143237594995L;
 
         /**

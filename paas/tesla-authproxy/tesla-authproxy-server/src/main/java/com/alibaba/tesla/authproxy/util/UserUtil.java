@@ -39,18 +39,4 @@ public class UserUtil {
             return USER_ID_UNKNOWN;
         }
     }
-
-    /**
-     * 从 userId 中获取 empId
-     *
-     * @param userId userId, 仅允许 empid:: 开头
-     * @return
-     */
-    public static String getEmpIdByUserId(String userId) {
-        if (!userId.startsWith(USER_ID_PREFIX_EMPID)) {
-            throw new AuthProxyException(AuthProxyErrorCode.INVALID_USER_ARGS,
-                String.format("userId %s is inavlid", userId));
-        }
-        return userId.substring(USER_ID_PREFIX_EMPID.length());
-    }
 }

@@ -23,9 +23,9 @@ import javax.validation.Valid;
  *
  * @author yaoxing.gyx@alibaba-inc.com
  */
+@Slf4j
 @RestController
 @RequestMapping("permission/import")
-@Slf4j
 public class PermissionImportController extends BaseController {
 
     private static final String LOG_PRE = "[" + PermissionImportController.class.getSimpleName() + "] ";

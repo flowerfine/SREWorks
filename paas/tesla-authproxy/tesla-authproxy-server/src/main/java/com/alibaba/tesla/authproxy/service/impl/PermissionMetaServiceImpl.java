@@ -44,9 +44,6 @@ public class PermissionMetaServiceImpl implements PermissionMetaService {
     @Autowired
     PermissionResMapper permissionResMapper;
 
-    @Autowired
-    UserMapper userMapper;
-
     @Transactional(propagation = Propagation.REQUIRES_NEW, rollbackForClassName = "*", isolation = Isolation.SERIALIZABLE)
     @Override
     public void createAndInit(String userId, String appId, PermissionMetaDO permissionMetaDO) {
@@ -104,7 +101,6 @@ public class PermissionMetaServiceImpl implements PermissionMetaService {
         PermissionMetaDO permissionMetaDO = permissionMetaMapper.selectOne(permissionCode);
         if(null == permissionMetaDO){
             return;
-            //throw new ApplicationException(500, "permission code not exits.");
         }
         permissionMetaDO.setIsEnable(0);
         int ret1 = permissionMetaMapper.updateByPrimaryKeySelective(permissionMetaDO);

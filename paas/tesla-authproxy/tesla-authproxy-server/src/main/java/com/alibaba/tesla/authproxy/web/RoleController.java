@@ -45,7 +45,6 @@ public class RoleController extends BaseController {
 
     @ApiOperation(value = "获取角色列表")
     @GetMapping("roles")
-    @ResponseBody
     public TeslaBaseResult retrieveList(
         @ApiParam("租户 ID")
         @NotEmpty
@@ -103,7 +102,6 @@ public class RoleController extends BaseController {
 
     @ApiOperation(value = "获取指定角色详情")
     @GetMapping("roles/{roleId:[a-zA-Z0-9,._\\-|]+}")
-    @ResponseBody
     public TeslaBaseResult detail(
         @ApiParam("租户 ID")
         @NotEmpty
@@ -136,7 +134,6 @@ public class RoleController extends BaseController {
 
     @ApiOperation(value = "创建角色")
     @PostMapping("roles")
-    @ResponseBody
     public TeslaBaseResult create(
         @ApiParam("租户 ID")
         @NotEmpty
@@ -165,7 +162,6 @@ public class RoleController extends BaseController {
 
     @ApiOperation(value = "更新角色")
     @PutMapping("roles/{roleId:[a-zA-Z0-9,._:\\-|]+}")
-    @ResponseBody
     public TeslaBaseResult update(
         @ApiParam("租户 ID")
         @NotEmpty
@@ -202,7 +198,6 @@ public class RoleController extends BaseController {
 
     @ApiOperation(value = "删除角色")
     @DeleteMapping("roles/{roleId:[a-zA-Z0-9,._:\\-|]+}")
-    @ResponseBody
     public TeslaBaseResult delete(
         @ApiParam("租户 ID")
         @NotEmpty
@@ -226,7 +221,6 @@ public class RoleController extends BaseController {
 
     @ApiOperation(value = "获取角色对应的用户列表")
     @GetMapping("roles/{roleId:[a-zA-Z0-9,._:\\-|]+}/users")
-    @ResponseBody
     public TeslaBaseResult users(
         @ApiParam("租户 ID")
         @NotEmpty
@@ -254,7 +248,6 @@ public class RoleController extends BaseController {
 
     @ApiOperation(value = "新增角色绑定的用户")
     @PostMapping("roles/{roleId:[a-zA-Z0-9,._:\\-|]+}/users")
-    @ResponseBody
     public TeslaBaseResult bindUsers(
         @ApiParam("租户 ID")
         @NotEmpty
@@ -285,7 +278,6 @@ public class RoleController extends BaseController {
 
     @ApiOperation(value = "获取角色对应的部门列表")
     @GetMapping("roles/{roleId:[a-zA-Z0-9,._:\\-|]+}/departments")
-    @ResponseBody
     public TeslaBaseResult departments(
         @ApiParam("租户 ID")
         @NotEmpty
@@ -315,7 +307,6 @@ public class RoleController extends BaseController {
      * 批量添加角色 (已废弃)
      */
     @PostMapping(value = "auth/role/batchAdd")
-    @ResponseBody
     public TeslaResult addRole(HttpServletRequest request, @RequestBody List<TeslaRoleVO> roles) {
         if (null == roles || roles.size() == 0) {
             return TeslaResultBuilder.errorResult(null, "Empty roles");
@@ -328,7 +319,6 @@ public class RoleController extends BaseController {
      * 查询某个 app 下的所有角色信息 (已废弃)
      */
     @GetMapping(value = "auth/role/all")
-    @ResponseBody
     public TeslaResult getAllRoles(HttpServletRequest request, @RequestParam String appId) {
         if (null == appId || appId.length() == 0) {
             return TeslaResultBuilder.errorResult(null, "Empty appId");

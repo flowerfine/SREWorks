@@ -6,7 +6,6 @@ import com.alibaba.tesla.authproxy.Constants;
 import com.alibaba.tesla.authproxy.model.mapper.AppMapper;
 import com.alibaba.tesla.authproxy.model.AppDO;
 import com.alibaba.tesla.authproxy.model.UserDO;
-import com.alibaba.tesla.authproxy.outbound.oam.OamClient;
 import com.alibaba.tesla.authproxy.service.AuthPolicy;
 import com.alibaba.tesla.authproxy.service.TeslaAppService;
 import com.alibaba.tesla.common.base.util.TeslaGsonUtil;
@@ -38,9 +37,6 @@ public class TeslaAppPrivateServiceImpl implements TeslaAppService {
      */
     @Autowired
     AppMapper appMapper;
-
-    @Autowired
-    OamClient oamClient;
 
     @Autowired
     AuthPolicy authPolicy;
@@ -75,12 +71,6 @@ public class TeslaAppPrivateServiceImpl implements TeslaAppService {
         }
 
         String roleName = authPolicy.getAuthServiceManager().createRoleNameByAppId(app.getAppId());
-        try {
-            //oamClient.createRole(loginUser.getAliyunPk(), loginUser.getBid(), roleName, app.getMemo());
-        } catch (Exception e) {
-            log.error("create oam role failed, aliyunPk={}, loginUser.bid={}, roleName={}, app.Memo={}, message={}",
-                loginUser.getAliyunPk(), loginUser.getBid(), roleName, app.getMemo(), e.getMessage());
-        }
         return 1;
     }
 

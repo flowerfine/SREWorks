@@ -1,21 +1,13 @@
 package com.alibaba.tesla.authproxy;
 
-
-import com.alibaba.fastjson.JSONObject;
-import com.alibaba.tesla.authproxy.constants.AuthJwtConstants;
-import com.alibaba.tesla.authproxy.constants.AuthProxyConstants;
 import com.alibaba.tesla.authproxy.exceptions.TeslaJwtException;
 import com.alibaba.tesla.authproxy.interceptor.*;
-import com.alibaba.tesla.authproxy.model.AppDO;
 import com.alibaba.tesla.authproxy.model.UserDO;
-import com.alibaba.tesla.authproxy.outbound.aas.AasUserInfo;
 import com.alibaba.tesla.authproxy.service.AuthPolicy;
-import com.alibaba.tesla.authproxy.service.TeslaAppService;
 import com.alibaba.tesla.authproxy.service.TeslaUserService;
 import com.alibaba.tesla.authproxy.util.AuthUtil;
 import com.alibaba.tesla.authproxy.util.CookieUtil;
 import com.alibaba.tesla.authproxy.util.TeslaJwtUtil;
-import com.alibaba.tesla.authproxy.util.UserUtil;
 import com.alibaba.tesla.authproxy.web.common.PrivateResultBuilder;
 import com.alibaba.tesla.common.utils.TeslaResult;
 
@@ -32,23 +24,15 @@ import org.springframework.validation.FieldError;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 /**
- * <p>Title: BaseController.java<／p>
- * <p>Description: Controller基类，处理返回值，获取登录用户，注入所有Controller公共依赖类 <／p>
- * <p>Copyright: Copyright (c) 2017<／p>
- * <p>Company: alibaba <／p>
- *
- * @author tandong.td@alibaba-inc.com
- * @version 1.0
- * @date 2017年5月3日
+ * Controller基类，处理返回值，获取登录用户，注入所有Controller公共依赖类
  */
-@Controller
 @Slf4j
+@Controller
 public class BaseController {
 
     @Autowired
@@ -61,10 +45,7 @@ public class BaseController {
     private TeslaUserService teslaUserService;
 
     @Autowired
-    private TeslaAppService teslaAppService;
-
-    @Autowired
-    AuthUtil authUtil;
+    private AuthUtil authUtil;
 
     /**
      * 获取登录用户信息
@@ -73,121 +54,7 @@ public class BaseController {
         LoginInterceptor loginIterceptor = authPolicy.getLoginServiceManager();
         Cookie loginUserIdCookie;
 
-        // 如果是 AAS / Aliyun 的登录方式
-        if (loginIterceptor instanceof AasLoginInterceptor || loginIterceptor instanceof AliyunLoginInterceptor) {
-            // 对于经过拦截器的请求，那么存在 REQUEST_ATTR_USER 属性
-            UserDO userDo = (UserDO)request.getAttribute(Constants.REQUEST_ATTR_USER);
-            if (userDo != null) {
-                return userDo;
-            }
-            // 对于内部调用，没有 REQUEST_ATTR_USER 属性，从 Header 中获取
-            String loginName = request.getHeader("X-Auth-User");
-            return teslaUserService.getUserByLoginName(loginName);
-        } else if (loginIterceptor instanceof SsoLoginInterceptor) {
-            /**
-             * 优先从cookie中获取用户信息
-             */
-            Cookie teslaTokenCookie = CookieUtil.getCookie(request, AuthProxyConstants.COOKIE_SSO_LOGIN_TOKEN);
-            if (teslaTokenCookie != null) {
-                String teslaToken = teslaTokenCookie.getValue();
-                Claims claims = null;
-                try {
-                    claims = TeslaJwtUtil.verify(teslaToken, authProperties.getOauth2JwtSecret());
-                    String empId = claims.get(AuthJwtConstants.JWT_EMP_ID_CLAIM_KEY, String.class);
-                    UserDO userDo = teslaUserService.getUserByEmpId(empId);
-                    if (userDo != null) {
-                        log.info("Tesla cookie auth success:{}", JSONObject.toJSONString(userDo));
-                        return userDo;
-                    }
-                } catch (TeslaJwtException e) {
-                    log.warn("Verify tesla jwt token failed! ErrMsg:{}", e.getMessage());
-                }
-            }
-
-            /**
-             * 使用header进行验证
-             */
-            UserDO userDo = authUtil.getExtAppUser(request);
-            if (userDo != null) {
-                log.info("Tesla header auth success:{}", JSONObject.toJSONString(userDo));
-                return userDo;
-            }
-
-            // 保留原使用header中appId/Product-Name进行验证；使用原auth-proxy校验的逻辑
-
-            /**
-             * 是否开启登录验证功能，如果开启使用tesla-authproxy中提供的统一登录功能。
-             * 如果不开启使用auth-proxy的登录拦截，用户登录成功之后将用户的bucId写入request的Header中
-             * 这里直接取Header中的bucId返回，后续调用查询菜单，权限验证使用bucId
-             */
-            String appId = request.getParameter("appId");
-            if (StringUtils.isEmpty(appId)) {
-                appId = request.getHeader("Product-Name");
-            }
-
-            UserDO user;
-            // ====start:兼容auth/user/loginUser该接口之前没有传appId参数的接入，当不传入该参数时候，从请求头中获取用户信息 add by tandong.td ===== //
-            if (StringUtils.isEmpty(appId)) {
-                user = new UserDO();
-                String bucId = request.getHeader("X-Buc-Id");
-                String userName = request.getHeader("X-Auth-User");
-                String empId = request.getHeader("X-Empid");
-                String email = request.getHeader("X-Email-Addr");
-
-                log.info("参数AppId为空，使用请求头用的cookie获取用户信息，Auth proxy give login user bucid is {}", bucId);
-                if (StringUtils.isEmpty(bucId)) {
-                    user.setBucId(0L);
-                } else {
-                    user.setBucId(Long.valueOf(bucId));
-                }
-                user.setTenantId(Constants.DEFAULT_TENANT_ID);
-                user.setNickName(userName);
-                user.setEmpId(empId);
-                user.setLoginName(userName);
-                user.setEmail(email);
-                user.setLang(authProperties.getDefaultLanguage());
-                user.setUserId(UserUtil.getUserId(user));
-                return user;
-            }
-            // =====end:兼容auth/user/loginUser该接口之前没有传appId参数的接入，当不传入该参数时候，从请求头中获取用户信息 add by tandong.td==== //
-            AppDO appDo = teslaAppService.getByAppId(appId);
-            if (null == appDo) {
-                throw new ApplicationException(TeslaResult.FAILURE, "应用[" + appId + "]不存在");
-            }
-            //loginEnable == 1使用了权代服务的登录拦截，则从cookie中获取用户信息，否则从nginx转发的请求头中获取
-            if (appDo.getLoginEnable() == 1) {
-                loginUserIdCookie = CookieUtil.getCookie(request, Constants.COOKIE_SSO_LOGIN_USER_ID);
-                if (null == loginUserIdCookie) {
-                    throw new ApplicationException(TeslaResult.NOAUTH, "Auth failure, Please login.");
-                }
-                user = teslaUserService.getUserByBucId(loginUserIdCookie.getValue());
-            } else {
-                //使用auth-proxy登录控制
-                user = new UserDO();
-                String bucId = request.getHeader("X-Buc-Id");
-                String userName = request.getHeader("X-Auth-User");
-                String empId = request.getHeader("X-Empid");
-                String email = request.getHeader("X-Email-Addr");
-
-                log.info("没有开启loginEnable，使用request请求头参数[X-Buc-Id]获取用户信息，X-Buc-Id is {}", bucId);
-                if (StringUtils.isEmpty(bucId)) {
-                    //start 兼容后端直接带请求头的调用权代接口的情况，如果不存在buc id则根据工号查询实时查询BUC。
-                    String userBucId = authPolicy.getAuthServiceManager().getUserId(empId);
-                    user.setBucId(Long.valueOf(userBucId));
-                    //end 兼容后端直接带请求头的调用权代接口的情况，如果不存在buc id则根据工号查询实时查询BUC。
-                } else {
-                    user.setBucId(Long.valueOf(bucId));
-                }
-                user.setTenantId(Constants.DEFAULT_TENANT_ID);
-                user.setNickName(userName);
-                user.setEmpId(empId);
-                user.setLoginName(userName);
-                user.setEmail(email);
-                user.setLang(authProperties.getDefaultLanguage());
-                user.setUserId(UserUtil.getUserId(user));
-            }
-            return user;
-        } else if (loginIterceptor instanceof DataBaseLoginInterceptor) {
+        if (loginIterceptor instanceof DataBaseLoginInterceptor) {
             //兼容请求头中放用户信息
             UserDO headerUserDo = authUtil.getExtAppUser(request);
             if (null != headerUserDo) {
@@ -230,35 +97,6 @@ public class BaseController {
             throw new ApplicationException(TeslaResult.FAILURE, "login.policyClass is error");
         }
     }
-
-    //public AasUserInfo loadUserInfoByTicket(String ticket) throws Exception {
-    //
-    //    log.info("调用aas的http接口校验ticket，ak为{},{}", authProperties.getAasKey(), authProperties.getAasSecret());
-    //
-    //    AliyunidClient aliyunidClient = new AliyunidClient(authProperties.getAasKey(), authProperties.getAasSecret());
-    //    List<OAuthPair> params = new ArrayList<OAuthPair>();
-    //    params.add(new OAuthPair("oauth_ticket", ticket));
-    //
-    //    String resp = aliyunidClient.callApi(authProperties.getAasLoadTicketUrl(), params);
-    //
-    //    /**
-    //     * 请求出错
-    //     */
-    //    if (resp.contains("errorCode")) {
-    //        log.error("AAS调用失败:{}", resp);
-    //        throw new Exception(resp);
-    //    }
-    //
-    //    AasUserInfo responseUser = JSONObject.parseObject(resp, AasUserInfo.class);
-    //    /**
-    //     * 用户不存在，Ticket校验失败
-    //     */
-    //    if (null == responseUser || null == responseUser.getAliyunID() || responseUser.getAliyunID().length() == 0) {
-    //        log.error("Login Ticket[{}]校验失败。aas返回数据[{}]", ticket, resp);
-    //    }
-    //    log.info("AAS返回数据[{}]", resp);
-    //    return responseUser;
-    //}
 
     /**
      * 构造分页信息

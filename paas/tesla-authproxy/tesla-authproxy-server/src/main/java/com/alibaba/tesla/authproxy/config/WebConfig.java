@@ -6,7 +6,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
-//import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 
 /**
  * 拦截器配置
@@ -18,11 +17,6 @@ public class WebConfig extends WebMvcConfigurationSupport {
 
     @Autowired
     private AuthProxyInterceptor authProxyInterceptor;
-    //
-    //@Autowired
-    //private LocaleChangeInterceptor localeChangeInterceptor;
-
-
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
@@ -47,16 +41,13 @@ public class WebConfig extends WebMvcConfigurationSupport {
             .excludePathPatterns("/switchView/**")
             .excludePathPatterns("/swagger-resources")
             .excludePathPatterns("/oauth2/redirect");
-        //
-        //// 多语言拦截器
-        //registry.addInterceptor(localeChangeInterceptor).addPathPatterns("/**");
-
-        // 指标拦截器
     }
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("doc.html").addResourceLocations("classpath:/META-INF/resources/");
-        registry.addResourceHandler("/webjars/**").addResourceLocations("classpath:/META-INF/resources/webjars/");
+        registry.addResourceHandler("doc.html")
+                .addResourceLocations("classpath:/META-INF/resources/");
+        registry.addResourceHandler("/webjars/**")
+                .addResourceLocations("classpath:/META-INF/resources/webjars/");
     }
 }

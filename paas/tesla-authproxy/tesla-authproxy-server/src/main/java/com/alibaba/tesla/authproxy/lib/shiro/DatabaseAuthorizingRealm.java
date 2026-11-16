@@ -25,8 +25,8 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-@Component
 @Slf4j
+@Component
 public class DatabaseAuthorizingRealm extends AuthorizingRealm {
 
     private static final String LOG_PRE = "[" + DatabaseAuthorizingRealm.class.getSimpleName()

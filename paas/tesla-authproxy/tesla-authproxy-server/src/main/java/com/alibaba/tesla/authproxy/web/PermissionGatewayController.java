@@ -28,16 +28,16 @@ import java.util.Arrays;
  *
  * @author yaoxing.gyx@alibaba-inc.com
  */
+@Slf4j
 @RestController
 @RequestMapping("permission/gateway")
-@Slf4j
+
 public class PermissionGatewayController extends BaseController {
 
     private static final String LOG_PRE = "[" + PermissionGatewayController.class.getSimpleName() + "] ";
 
     @Autowired
     private AuthProperties authProperties;
-
     @Autowired
     private PermissionService permissionService;
 

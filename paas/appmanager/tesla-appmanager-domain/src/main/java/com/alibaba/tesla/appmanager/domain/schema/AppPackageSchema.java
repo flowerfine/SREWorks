@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -15,7 +14,6 @@ import java.util.List;
  *
  * @author yaoxing.gyx@alibaba-inc.com
  */
-@Slf4j
 @Data
 @Builder
 @NoArgsConstructor

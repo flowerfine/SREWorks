@@ -15,7 +15,6 @@ import com.alibaba.tesla.appmanager.domain.core.CustomWorkloadResource;
  **/
 @Data
 public class CustomAddonSchema implements Schema, Serializable {
-
     private static final long serialVersionUID = 1471386093648407940L;
 
     /**
@@ -40,7 +39,6 @@ public class CustomAddonSchema implements Schema, Serializable {
 
     @Data
     public static class Spec implements Serializable{
-
         private static final long serialVersionUID = 9046093793450236498L;
 
         private CustomWorkloadResource workload;

@@ -1,7 +1,5 @@
 package com.alibaba.tesla.authproxy.config.jpa;
 
-import lombok.extern.slf4j.Slf4j;
-
 import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;
 import java.sql.Timestamp;
@@ -9,7 +7,6 @@ import java.time.ZoneId;
 import java.time.ZonedDateTime;
 
 @Converter(autoApply = true)
-@Slf4j
 public class ZonedDateTimeAttributeConverter implements AttributeConverter<ZonedDateTime, Timestamp> {
 
     @Override

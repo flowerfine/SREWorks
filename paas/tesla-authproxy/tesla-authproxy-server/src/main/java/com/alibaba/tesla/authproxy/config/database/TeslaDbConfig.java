@@ -39,7 +39,6 @@ public class TeslaDbConfig {
     @Bean("teslaSessionTemplate")
     public SqlSessionTemplate teslaSessionTemplate(
         @Qualifier("teslaSessionFactory") SqlSessionFactory teslaSessionFactory) {
-        SqlSessionTemplate template = new SqlSessionTemplate(teslaSessionFactory);
-        return template;
+        return new SqlSessionTemplate(teslaSessionFactory);
     }
 }

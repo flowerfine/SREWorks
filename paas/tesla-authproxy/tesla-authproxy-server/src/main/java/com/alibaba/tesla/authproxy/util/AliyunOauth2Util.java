@@ -1,15 +1,11 @@
 package com.alibaba.tesla.authproxy.util;
 
 import com.alibaba.tesla.authproxy.AuthProperties;
-import com.alibaba.tesla.authproxy.core.AliyunRsaKeyContainer;
 import com.alibaba.tesla.authproxy.lib.exceptions.AuthProxyException;
 import com.alibaba.tesla.authproxy.model.vo.AliyunAccessTokenVO;
 import com.alibaba.tesla.authproxy.model.vo.AliyunRefreshTokenVO;
 import com.alibaba.tesla.authproxy.model.vo.AliyunUserInfoVO;
 import com.alibaba.tesla.common.base.util.TeslaGsonUtil;
-import com.nimbusds.jose.crypto.RSASSAVerifier;
-import com.nimbusds.jose.jwk.RSAKey;
-import com.nimbusds.jwt.SignedJWT;
 import lombok.extern.slf4j.Slf4j;
 import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
@@ -29,9 +25,6 @@ import java.util.List;
 @Component
 @Slf4j
 public class AliyunOauth2Util {
-
-    @Autowired
-    private AliyunRsaKeyContainer rsaKeyContainer;
 
     @Autowired
     private OkHttpClient httpClient;
@@ -124,33 +117,5 @@ public class AliyunOauth2Util {
             throw new AuthProxyException(String.format("Cannot parse user info from aliyun, accessToken=%s, "
                 + "response=%s, exception=%s", accessToken, response, ExceptionUtils.getStackTrace(e)));
         }
-    }
-
-    /**
-     * 验证指定的 JWT Token 是否合法
-     *
-     * @param token JWT Token
-     * @return true or false
-     */
-    public boolean verifySign(SignedJWT token) {
-        List<RSAKey> publicKeyList = rsaKeyContainer.getKeys();
-        RSAKey rsaKey = null;
-        for (RSAKey key : publicKeyList) {
-            if (token.getHeader().getKeyID().equals(key.getKeyID())) {
-                rsaKey = key;
-            }
-        }
-        if (rsaKey != null) {
-            try {
-                RSASSAVerifier verifier = new RSASSAVerifier(rsaKey.toRSAPublicKey());
-                return token.verify(verifier);
-            } catch (Exception e) {
-                log.warn("Cannot verify jwt token, jwt={}, exception={}", TeslaGsonUtil.toJson(token),
-                    ExceptionUtils.getStackTrace(e));
-                return false;
-            }
-        }
-        throw new AuthProxyException(String.format("Rsa key comparison failed, public keys is %s",
-            TeslaGsonUtil.toJson(publicKeyList)));
     }
 }

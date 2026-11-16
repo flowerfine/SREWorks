@@ -39,13 +39,6 @@ public class TeslaWebSecurityConfig extends WebSecurityConfigurerAdapter {
             .csrf().disable()
             .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED).and()
             .authorizeRequests()
-            //.antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-            // 允许对于网站静态资源的无授权访问
-            //.antMatchers(HttpMethod.GET, "/", "/favicon.ico", "/status.taobao").permitAll()
-            // 对于获取token的rest api要允许匿名访问
-            //.antMatchers("/auth/**").permitAll()
-            // 除上面外的所有请求全部需要鉴权认证
-            //.anyRequest().authenticated();
             .anyRequest().permitAll();
         httpSecurity.headers().cacheControl().disable();
     }

@@ -69,9 +69,11 @@ public class ResponseCookie {
     static {
         DECIMAL_FORMAT_SYMBOLS = new DecimalFormatSymbols(Locale.ENGLISH);
         GMT = ZoneId.of("GMT");
-        DATE_FORMATTERS = new DateTimeFormatter[] {DateTimeFormatter.RFC_1123_DATE_TIME, DateTimeFormatter.ofPattern(
-            "EEEE, dd-MMM-yy HH:mm:ss zz", Locale.US), DateTimeFormatter.ofPattern("EEE MMM dd HH:mm:ss yyyy",
-            Locale.US).withZone(GMT)};
+        DATE_FORMATTERS = new DateTimeFormatter[] {
+                DateTimeFormatter.RFC_1123_DATE_TIME,
+                DateTimeFormatter.ofPattern("EEEE, dd-MMM-yy HH:mm:ss zz", Locale.US),
+                DateTimeFormatter.ofPattern("EEE MMM dd HH:mm:ss yyyy", Locale.US).withZone(GMT)
+        };
     }
 
     static String formatDate(long date) {

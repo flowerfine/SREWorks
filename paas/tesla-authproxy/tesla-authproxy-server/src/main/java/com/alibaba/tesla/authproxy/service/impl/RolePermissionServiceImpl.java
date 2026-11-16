@@ -22,8 +22,6 @@ import java.util.stream.Collectors;
 @Slf4j
 public class RolePermissionServiceImpl implements RolePermissionService {
 
-    private static final String LOG_PRE = "[" + RolePermissionServiceImpl.class.getSimpleName() + "] ";
-
     @Autowired
     private RolePermissionRelMapper rolePermissionRelMapper;
 

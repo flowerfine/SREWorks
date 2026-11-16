@@ -17,8 +17,8 @@ import org.springframework.stereotype.Component;
  * @version 1.0
  * @date 2017年4月8日
  */
-@Component
 @Slf4j
+@Component
 public class SpringContextHolder implements ApplicationContextAware, DisposableBean {
 
     private static ApplicationContext applicationContext = null;

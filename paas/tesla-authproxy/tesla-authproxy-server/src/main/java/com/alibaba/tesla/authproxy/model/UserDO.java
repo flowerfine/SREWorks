@@ -2,15 +2,11 @@ package com.alibaba.tesla.authproxy.model;
 
 import com.alibaba.tesla.authproxy.AuthProperties;
 import com.alibaba.tesla.authproxy.Constants;
-import com.alibaba.tesla.authproxy.lib.exceptions.AuthProxyThirdPartyError;
-import com.alibaba.tesla.authproxy.outbound.oam.OamClient;
 import com.alibaba.tesla.authproxy.util.ApplicationContextUtil;
 
-import com.aliyuncs.exceptions.ClientException;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang.exception.ExceptionUtils;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
@@ -18,7 +14,6 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;

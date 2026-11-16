@@ -8,8 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
-@Component
 @Slf4j
+@Component
 public class SecurityManager {
 
     @Autowired
@@ -26,7 +26,6 @@ public class SecurityManager {
 
     @Bean
     public EhCacheManager ehCacheManager(){
-        System.out.println("ShiroConfiguration.getEhCacheManager()");
         EhCacheManager cacheManager = new EhCacheManager();
         cacheManager.setCacheManagerConfigFile("classpath:ehcache-shiro.xml");
         return cacheManager;

@@ -26,9 +26,9 @@ import org.springframework.security.web.util.matcher.RequestMatcher;
 
 import java.util.*;
 
+@Slf4j
 @Configuration
 @EnableResourceServer
-@Slf4j
 public class Oauth2ResourceServerConfig extends ResourceServerConfigurerAdapter {
 
     private static final String RESOURCE_ID = "appmanager";

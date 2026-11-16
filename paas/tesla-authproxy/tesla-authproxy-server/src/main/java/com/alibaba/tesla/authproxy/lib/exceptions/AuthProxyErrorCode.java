@@ -40,7 +40,7 @@ public enum AuthProxyErrorCode {
     private final int code;
     private final String description;
 
-    private AuthProxyErrorCode(int code, String description) {
+    AuthProxyErrorCode(int code, String description) {
         this.code = code;
         this.description = description;
     }

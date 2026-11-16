@@ -37,16 +37,15 @@ import javax.validation.constraints.Pattern;
 public class UserProfileController extends BaseController {
 
     @Autowired
+    private AuthProperties authProperties;
+    @Autowired
     private TeslaUserService teslaUserService;
 
-    @Autowired
-    private AuthProperties authProperties;
 
     /**
      * 获取当前用户的 Profile
      */
     @GetMapping
-    @ResponseBody
     public TeslaBaseResult retrieve(
         @ApiParam("租户 ID")
         @NotEmpty
@@ -82,7 +81,6 @@ public class UserProfileController extends BaseController {
      * 更新当前用户的 Profile 信息
      */
     @PostMapping(value = "lang")
-    @ResponseBody
     public TeslaBaseResult changeLang(HttpServletRequest request, HttpServletResponse response,
                                       @Valid @RequestBody UpdateTeslaUserParam param) throws Exception {
         String empId = request.getHeader("X-EmpId");

@@ -16,7 +16,6 @@ import lombok.Data;
  **/
 @Data
 public class CustomWorkloadResource implements Serializable {
-
     private static final long serialVersionUID = 7881942127685889587L;
 
     /**

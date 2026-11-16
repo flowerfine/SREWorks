@@ -2,7 +2,6 @@ package com.alibaba.tesla.authproxy.service.impl;
 
 import com.alibaba.tesla.authproxy.AuthProperties;
 import com.alibaba.tesla.authproxy.Constants;
-import com.alibaba.tesla.authproxy.model.mapper.UserMapper;
 import com.alibaba.tesla.authproxy.service.TeslaUserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,9 +21,6 @@ public class TeslaUserDetailsServiceImpl implements UserDetailsService {
 
     @Autowired
     private AuthProperties authProperties;
-
-    @Autowired
-    private UserMapper userMapper;
 
     @Autowired
     private TeslaUserService teslaUserService;

@@ -10,7 +10,6 @@ import com.alibaba.tesla.authproxy.exceptions.UnAuthorizedException;
 import com.alibaba.tesla.authproxy.lib.exceptions.*;
 import com.alibaba.tesla.authproxy.model.AppDO;
 import com.alibaba.tesla.authproxy.service.TeslaAppService;
-import com.alibaba.tesla.authproxy.service.impl.OamAuthServiceManager;
 import com.alibaba.tesla.authproxy.util.CookieUtil;
 import com.alibaba.tesla.authproxy.util.ResponseUtil;
 import com.alibaba.tesla.authproxy.util.StringUtil;
@@ -113,19 +112,14 @@ public class GlobalControllerExceptionHandler extends BaseController {
         // 没有登录异常
         if (TeslaResult.NOAUTH == exception.getErrCode()) {
             String serverUrl = authProperties.getServerUrl();
-            String loginUrl = authProperties.getLoginUrl();
             String refererUrl = request.getHeader(HttpHeaders.REFERER);
             if (null == refererUrl || refererUrl.length() == 0) {
                 refererUrl = authProperties.getCallbackUrl();
             }
             String realCallbackUrl = null;
             try {
-                if (OamAuthServiceManager.class.getTypeName().equals(authProperties.getAuthPolicy())) {
-                    realCallbackUrl = loginUrl + "?oauth_callback=" + URLEncoder.encode(refererUrl, "UTF-8");
-                } else {
-                    realCallbackUrl = serverUrl + "/api-proxy/auth/login?backurl=" + URLEncoder.encode(refererUrl,
+                realCallbackUrl = serverUrl + "/api-proxy/auth/login?backurl=" + URLEncoder.encode(refererUrl,
                         "UTF-8");
-                }
             } catch (UnsupportedEncodingException e) {
                 log.error("Invalid callback url in system application properties, callback={}, msg={}",
                     refererUrl, e.getMessage());

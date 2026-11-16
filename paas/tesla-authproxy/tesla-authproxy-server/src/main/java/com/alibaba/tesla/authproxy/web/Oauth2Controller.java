@@ -49,7 +49,6 @@ public class Oauth2Controller {
         CookieUtil.setCookie(response, Constants.COOKIE_ALIYUN_ACCESS_TOKEN, token.getAccessToken(), 0, topDomain);
         CookieUtil.setCookie(response, Constants.COOKIE_ALIYUN_REFRESH_TOKEN, token.getRefreshToken(), 0, topDomain);
         CookieUtil.setCookie(response, Constants.COOKIE_ALIYUN_EXPIRES_AT, expiresAt, 0, topDomain);
-        //response.sendRedirect(SecurityUtil.getSafeUrl(stateJson.get("callback").getAsString()));
         response.sendRedirect(stateJson.get("callback").getAsString());
     }
 }

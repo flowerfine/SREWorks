@@ -2,7 +2,6 @@ package com.alibaba.tesla.appmanager.domain.core;
 
 import com.alibaba.fastjson.JSONObject;
 import lombok.Data;
-import lombok.extern.slf4j.Slf4j;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -13,10 +12,8 @@ import java.util.List;
  *
  * @author yaoxing.gyx@alibaba-inc.com
  */
-@Slf4j
 @Data
 public class WorkloadResource implements Serializable {
-
     private static final long serialVersionUID = 133506853433623661L;
 
     /**
@@ -49,7 +46,6 @@ public class WorkloadResource implements Serializable {
      */
     @Data
     public static class MetaData implements Serializable {
-
         private static final long serialVersionUID = -7986607001492546572L;
 
         private String namespace;
@@ -60,7 +56,6 @@ public class WorkloadResource implements Serializable {
 
     @Data
     public static class DataOutput implements Serializable {
-
         private static final long serialVersionUID = 3957915292551325502L;
 
         /**

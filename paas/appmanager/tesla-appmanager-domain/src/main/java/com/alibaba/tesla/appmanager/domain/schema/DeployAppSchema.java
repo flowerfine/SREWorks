@@ -1,6 +1,5 @@
 package com.alibaba.tesla.appmanager.domain.schema;
 
-import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.annotation.JSONField;
 import com.alibaba.tesla.appmanager.common.constants.DefaultConstant;
@@ -10,7 +9,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.Serializable;
@@ -23,10 +21,8 @@ import java.util.*;
  *
  * @author yaoxing.gyx@alibaba-inc.com
  */
-@Slf4j
 @Data
 public class DeployAppSchema implements Schema, Serializable {
-
     private static final long serialVersionUID = -5036403088019645161L;
 
     /**
@@ -57,7 +53,6 @@ public class DeployAppSchema implements Schema, Serializable {
     @NoArgsConstructor
     @AllArgsConstructor
     public static class MetaData implements Serializable {
-
         private static final long serialVersionUID = 3099676869740322981L;
 
         private String name;
@@ -72,7 +67,6 @@ public class DeployAppSchema implements Schema, Serializable {
     @NoArgsConstructor
     @AllArgsConstructor
     public static class MetaDataAnnotations implements Serializable {
-
         private static final long serialVersionUID = 3787386043228166939L;
 
         /**
@@ -128,7 +122,6 @@ public class DeployAppSchema implements Schema, Serializable {
     @NoArgsConstructor
     @AllArgsConstructor
     public static class DataOutput implements Serializable {
-
         private static final long serialVersionUID = 2150471143237594995L;
 
         /**
@@ -147,7 +140,6 @@ public class DeployAppSchema implements Schema, Serializable {
     @NoArgsConstructor
     @AllArgsConstructor
     public static class DataInput implements Serializable {
-
         private static final long serialVersionUID = -453709853116435642L;
 
         /**
@@ -166,7 +158,6 @@ public class DeployAppSchema implements Schema, Serializable {
     @NoArgsConstructor
     @AllArgsConstructor
     public static class Dependency implements Serializable {
-
         private static final long serialVersionUID = -6716060765887913097L;
 
         /**
@@ -185,7 +176,6 @@ public class DeployAppSchema implements Schema, Serializable {
     @NoArgsConstructor
     @AllArgsConstructor
     public static class ParameterValue implements Serializable {
-
         private static final long serialVersionUID = -1952333694105350537L;
 
         /**
@@ -209,7 +199,6 @@ public class DeployAppSchema implements Schema, Serializable {
     @NoArgsConstructor
     @AllArgsConstructor
     public static class DataInputValueFrom implements Serializable {
-
         private static final long serialVersionUID = -7599464970568861088L;
 
         /**

@@ -37,8 +37,6 @@ import java.util.stream.Collectors;
 @Slf4j
 public class RoleServiceImpl implements RoleService {
 
-    private static final String LOG_PRE = "[" + RoleServiceImpl.class.getSimpleName() + "] ";
-
     private static final String SPLITTER = ":";
 
     @Autowired

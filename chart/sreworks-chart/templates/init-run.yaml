@@ -9,13 +9,6 @@ data:
     
     cat /swcli/swcli.yaml
 
-    #cd /root
-
-    #if [ ! -d sreworks-flycore ]; then
-    #    mkdir sreworks-flycore
-    #fi
-    #cd sreworks-flycore
-
     cd /root/saas/swcore/api/core/
 
     export NAMESPACE_ID=$(cat /run/secrets/kubernetes.io/serviceaccount/namespace)

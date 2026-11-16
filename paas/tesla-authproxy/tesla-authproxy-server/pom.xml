@@ -1,17 +1,15 @@
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-
+    <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.alibaba.tesla</groupId>
         <artifactId>tesla-authproxy</artifactId>
         <version>2.1.0-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
-
-    <modelVersion>4.0.0</modelVersion>
     <artifactId>tesla-authproxy-server</artifactId>
-    <packaging>jar</packaging>
     <name>tesla-authproxy-server</name>
+    <packaging>jar</packaging>
 
     <dependencies>
         <!-- tesla module -->
@@ -59,14 +57,6 @@
             <artifactId>fastjson</artifactId>
         </dependency>
 
-
-        <!-- shiro -->
-        <dependency>
-            <groupId>org.apache.shiro</groupId>
-            <artifactId>shiro-core</artifactId>
-            <version>1.7.0</version>
-        </dependency>
-
         <!-- tesla common -->
         <dependency>
             <groupId>io.sreworks</groupId>
@@ -77,6 +67,12 @@
             <artifactId>tesla-common-utils</artifactId>
         </dependency>
 
+        <!-- shiro -->
+        <dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-core</artifactId>
+            <version>1.7.0</version>
+        </dependency>
         <!-- shiro-ehcache -->
         <dependency>
             <groupId>org.apache.shiro</groupId>
@@ -107,6 +103,11 @@
         <dependency>
             <groupId>org.mybatis</groupId>
             <artifactId>mybatis-spring</artifactId>
+        </dependency>
+        <!-- mybatis typehandler -->
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis-typehandlers-jsr310</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
@@ -145,12 +146,6 @@
         <dependency>
             <groupId>io.sreworks</groupId>
             <artifactId>tesla-webmvc-spring-boot-starter</artifactId>
-        </dependency>
-
-        <!-- mybatis typehandler -->
-        <dependency>
-            <groupId>org.mybatis</groupId>
-            <artifactId>mybatis-typehandlers-jsr310</artifactId>
         </dependency>
 
         <!-- apache commons -->
@@ -257,6 +252,23 @@
             <artifactId>geocoder</artifactId>
         </dependency>
 
+        <!-- monitor -->
+        <dependency>
+            <groupId>io.prometheus</groupId>
+            <artifactId>simpleclient</artifactId>
+            <version>0.6.0</version>
+        </dependency>
+        <dependency>
+            <groupId>io.prometheus</groupId>
+            <artifactId>simpleclient_spring_boot</artifactId>
+            <version>0.6.0</version>
+        </dependency>
+        <dependency>
+            <groupId>io.prometheus</groupId>
+            <artifactId>simpleclient_hotspot</artifactId>
+            <version>0.6.0</version>
+        </dependency>
+
         <!-- gson -->
         <dependency>
             <groupId>com.google.code.gson</groupId>
@@ -288,22 +300,6 @@
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <scope>test</scope>
-        </dependency>
-        <!-- monitor -->
-        <dependency>
-            <groupId>io.prometheus</groupId>
-            <artifactId>simpleclient</artifactId>
-            <version>0.6.0</version>
-        </dependency>
-        <dependency>
-            <groupId>io.prometheus</groupId>
-            <artifactId>simpleclient_spring_boot</artifactId>
-            <version>0.6.0</version>
-        </dependency>
-        <dependency>
-            <groupId>io.prometheus</groupId>
-            <artifactId>simpleclient_hotspot</artifactId>
-            <version>0.6.0</version>
         </dependency>
     </dependencies>
 

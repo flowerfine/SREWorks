@@ -27,9 +27,7 @@ import com.alibaba.tesla.common.base.enums.TeslaRegion;
 import com.alibaba.tesla.common.utils.TeslaMessageDigest;
 import com.alibaba.tesla.common.utils.TeslaResult;
 import com.alibaba.tesla.common.utils.TeslaResultBuilder;
-
 import com.alibaba.tesla.web.constant.HttpHeaderNames;
-
 import com.github.pagehelper.PageInfo;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -43,7 +41,6 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
-
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.time.Duration;
@@ -60,24 +57,19 @@ public class UserController extends BaseController {
 
     @Autowired
     private TeslaUserService teslaUserService;
-
     @Autowired
     private TeslaAppService teslaAppService;
-
     @Autowired
     private AuthProperties authProperties;
-
     @Autowired
     private AuditUtil auditUtil;
-
     @Autowired
     private UserMapper userMapper;
 
     /**
      * 获取登录用户信息
      */
-    @RequestMapping(value = "auth/user/loginUser", method = RequestMethod.GET)
-    @ResponseBody
+    @GetMapping("auth/user/loginUser")
     public Map<String, Object> getLoginUserInfo(HttpServletRequest request, HttpServletResponse response) {
         UserDO userDo = this.getLoginUser(request);
         Map<String, Object> result = buildResult(userDo);
@@ -98,9 +90,9 @@ public class UserController extends BaseController {
             teslaUserService.save(userDo);
         }
         auditUtil.info(userDo, AuditTargetEnum.DATA, AuditActionEnum.SELECT, AuditOutcomeEnum.SUCCESS,
-            String.format("authproxy - auth user getLoginUserInfo, result=%s",
-                gson.toJson(result)),
-            AuditReasonEnum.AUTHORIZED);
+                String.format("authproxy - auth user getLoginUserInfo, result=%s",
+                        gson.toJson(result)),
+                AuditReasonEnum.AUTHORIZED);
         return result;
     }
 
@@ -110,8 +102,7 @@ public class UserController extends BaseController {
      * @param request 请求中需要包含 X-Auth-User 和 X-Auth-UserId 两个头
      * @return 返回用户详细信息，同 /info 接口
      */
-    @GetMapping(value = "auth/user/detail")
-    @ResponseBody
+    @GetMapping("auth/user/detail")
     public TeslaResult getUserDetail(HttpServletRequest request) throws ClientUserArgsException {
         String authUser = request.getHeader("X-Auth-User");
         String authUserId = request.getHeader("X-Auth-UserId");
@@ -139,11 +130,10 @@ public class UserController extends BaseController {
     /**
      * 权代服务V2版本新提供接口，建议不要使用/loginUser接口了
      */
-    @RequestMapping(value = "auth/user/info", method = RequestMethod.GET)
-    @ResponseBody
+    @GetMapping("auth/user/info")
     public com.alibaba.tesla.common.base.TeslaResult getUserInfo(HttpServletRequest request,
-        @RequestParam(required = false) String appId,
-        HttpServletResponse response) {
+                                                                 @RequestParam(required = false) String appId,
+                                                                 HttpServletResponse response) {
         if (StringUtils.isEmpty(appId)) {
             appId = authProperties.getDefaultAppId();
         }
@@ -164,18 +154,18 @@ public class UserController extends BaseController {
         if (TeslaRegion.PRIVATE.equals(authProperties.getTeslaSwitch())) {
             //写入tesla token cookie
             String teslaToken = TeslaJwtUtil.create(userDo.getEmpId(), userDo.getLoginName(),
-                Objects.toString(userDo.getBucId()), userDo.getEmail(),
-                UserUtil.getUserId(userDo), userDo.getNickName(), userDo.getAliyunPk(), TeslaJwtUtil.JWT_TOKEN_TIMEOUT,
-                authProperties.getOauth2JwtSecret());
+                    Objects.toString(userDo.getBucId()), userDo.getEmail(),
+                    UserUtil.getUserId(userDo), userDo.getNickName(), userDo.getAliyunPk(), TeslaJwtUtil.JWT_TOKEN_TIMEOUT,
+                    authProperties.getOauth2JwtSecret());
             if (Objects.equals(authProperties.getNetworkProtocol(), "https")) {
                 ResponseCookie responseCookie = ResponseCookie.builder().name(AuthProxyConstants.COOKIE_SSO_LOGIN_TOKEN)
-                    .value(teslaToken)
-                    .maxAge(Duration.ofSeconds(24 * 60 * 60))
-                    .domain(authProperties.getCookieDomain())
-                    .sameSite("None")
-                    .secure(true)
-                    .path("/")
-                    .build();
+                        .value(teslaToken)
+                        .maxAge(Duration.ofSeconds(24 * 60 * 60))
+                        .domain(authProperties.getCookieDomain())
+                        .sameSite("None")
+                        .secure(true)
+                        .path("/")
+                        .build();
                 response.addHeader("Set-Cookie", responseCookie.toString());
             } else {
                 CookieUtil.setCookie(response, AuthProxyConstants.COOKIE_SSO_LOGIN_TOKEN, teslaToken, 0);
@@ -198,53 +188,33 @@ public class UserController extends BaseController {
         // 转换最终输出结果
         TeslaUserInfoResult userInfoResult = new TeslaUserInfoResult(userDo, appId, authProperties.getEnvironment());
         auditUtil.info(userDo, AuditTargetEnum.DATA, AuditActionEnum.SELECT, AuditOutcomeEnum.SUCCESS,
-            String.format("authproxy - auth user getUserInfo, param=%s, result=%s",
-                String.format("appId=%s", appId), gson.toJson(userInfoResult)), AuditReasonEnum.AUTHORIZED);
+                String.format("authproxy - auth user getUserInfo, param=%s, result=%s",
+                        String.format("appId=%s", appId), gson.toJson(userInfoResult)), AuditReasonEnum.AUTHORIZED);
         return TeslaResultBuilder.successResult(userInfoResult);
     }
 
-    /**
-     * @param request
-     * @param userName
-     * @return
-     */
-    @RequestMapping(value = "auth/user/list", method = RequestMethod.GET)
-    @ResponseBody
+    @GetMapping("auth/user/list")
     public TeslaResult list(HttpServletRequest request, @RequestParam String userName) {
         List<UserDO> list = teslaUserService.selectByName(userName);
         return buildSuccessTeslaResult(list);
     }
 
-    @RequestMapping(value = "auth/user/get", method = RequestMethod.GET)
-    @ResponseBody
+    @GetMapping("auth/user/get")
     public TeslaResult get(String empId) {
         return buildSuccessTeslaResult(teslaUserService.getUserByEmpId(empId));
     }
 
-    /**
-     * 用户语言列表获取 API
-     */
-    @RequestMapping(value = "auth/user/lang", method = RequestMethod.GET)
-    @ResponseBody
+    @GetMapping("auth/user/lang")
     public TeslaResult accountLangList() {
         TeslaUserLangListResult result = new TeslaUserLangListResult();
         result.setLangs(Arrays.asList(authProperties.getAvailableLanguages().split(",")));
         return PrivateResultBuilder.buildExtSuccessResult(result);
     }
 
-    /**
-     * 创建tesla用户
-     *
-     * @param request
-     * @param createRequest
-     * @param bindingResult
-     * @return
-     */
     @PostMapping("auth/tesla/user/create")
-    @ResponseBody
     public com.alibaba.tesla.common.base.TeslaResult create(HttpServletRequest request,
-        @Valid @RequestBody TeslaUserCreateRequest createRequest,
-        BindingResult bindingResult) {
+                                                            @Valid @RequestBody TeslaUserCreateRequest createRequest,
+                                                            BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return TeslaResultBuilder.failureResult(400, null, bindingResult.getFieldError().getDefaultMessage());
         }
@@ -275,9 +245,8 @@ public class UserController extends BaseController {
     }
 
     @PostMapping("auth/tesla/user/modify")
-    @ResponseBody
     public com.alibaba.tesla.common.base.TeslaResult modify(HttpServletRequest request,
-        @RequestBody TeslaUserModifyRequest modifyRequest) throws Exception {
+                                                            @RequestBody TeslaUserModifyRequest modifyRequest) throws Exception {
         String empId = request.getHeader(HttpHeaderNames.X_EMPL_ID);
         UserDO userDo = teslaUserService.getUserByEmpId(empId);
         userDo.setGmtModified(new Date());
@@ -287,7 +256,7 @@ public class UserController extends BaseController {
         userDo.setLoginName(modifyRequest.getLoginName());
         if (StringUtils.isNotEmpty(modifyRequest.getPassword())) {
             userMapper.updateLoginPassword(
-                userDo.getLoginName(), TeslaMessageDigest.getMD5(modifyRequest.getPassword()), new Date());
+                    userDo.getLoginName(), TeslaMessageDigest.getMD5(modifyRequest.getPassword()), new Date());
         }
         userDo.setAvatar(modifyRequest.getAvatar());
         int ret = teslaUserService.update(userDo);
@@ -295,7 +264,6 @@ public class UserController extends BaseController {
     }
 
     @DeleteMapping("auth/tesla/user/delete")
-    @ResponseBody
     public com.alibaba.tesla.common.base.TeslaResult delete(HttpServletRequest request, Long id) {
         if (id == 1L) {
             return TeslaResultBuilder.noPermissionResult(null);
@@ -309,20 +277,16 @@ public class UserController extends BaseController {
 
     /**
      * 查询某个应用下所有已经开启的服务元数据（含部分开启）
-     *
-     * @param userRequest
-     * @return
      */
     @PostMapping("auth/tesla/user/list")
-    @ResponseBody
     public com.alibaba.tesla.common.base.TeslaResult list(HttpServletRequest request,
-        @Valid @RequestBody TeslaUserListRequest userRequest,
-        BindingResult bindingResult) {
+                                                          @Valid @RequestBody TeslaUserListRequest userRequest,
+                                                          BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return TeslaResultBuilder.failureResult(400, null, bindingResult.getFieldError().getDefaultMessage());
         }
         PageInfo<UserDO> pageData = teslaUserService.listUserWithPage(userRequest.getPage(), userRequest.getSize(),
-            userRequest.getLoginName());
+                userRequest.getLoginName());
         Map<String, Object> ret = new HashMap<>();
         ret.put("list", pageData.getList());
         ret.put("total", pageData.getTotal());
@@ -331,15 +295,11 @@ public class UserController extends BaseController {
 
     /**
      * 修改用户密码
-     *
-     * @param changePwdRequest
-     * @return
      */
     @PostMapping("auth/tesla/user/change/password")
-    @ResponseBody
     public com.alibaba.tesla.common.base.TeslaResult changePassword(HttpServletRequest request,
-        @Valid @RequestBody TeslaUserChangePwdRequest changePwdRequest,
-        BindingResult bindingResult) {
+                                                                    @Valid @RequestBody TeslaUserChangePwdRequest changePwdRequest,
+                                                                    BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             TeslaResultBuilder.successResult(400, bindingResult.getFieldError().getDefaultMessage());
         }
@@ -348,15 +308,12 @@ public class UserController extends BaseController {
         }
         UserDO loginUser = this.getLoginUser(request);
         teslaUserService.changePassword(loginUser, changePwdRequest.getOldPassword(),
-            changePwdRequest.getNewPassword());
+                changePwdRequest.getNewPassword());
         return TeslaResultBuilder.successResult(null);
     }
 
     /**
      * 判断是否为管理员用户
-     *
-     * @param request
-     * @return
      */
     private boolean isAdminUser(HttpServletRequest request) {
         String empId = request.getHeader(HttpHeaderNames.X_EMPL_ID);
@@ -365,8 +322,6 @@ public class UserController extends BaseController {
 
     /**
      * 获取当前的登录地址
-     *
-     * @param appId 应用 ID
      */
     private String getLoginUrl(String appId) throws UnsupportedEncodingException {
         AppDO appDo = teslaAppService.getByAppId(appId);
@@ -385,7 +340,7 @@ public class UserController extends BaseController {
             return "";
         }
         if (null == aliyunCookieLang.getValue() || aliyunCookieLang.getValue().length() == 0 ||
-            null == aliyunCookieCountry.getValue() || aliyunCookieCountry.getValue().length() == 0) {
+                null == aliyunCookieCountry.getValue() || aliyunCookieCountry.getValue().length() == 0) {
             return "";
         }
         return aliyunCookieLang.getValue() + "_" + aliyunCookieCountry.getValue();
@@ -393,9 +348,9 @@ public class UserController extends BaseController {
 
     private void setAliyunLanguageCookie(HttpServletResponse response, String aliyunLanguage) {
         String topDomain;
-        if(StringUtils.isNotEmpty(authProperties.getCookieDomain())){
+        if (StringUtils.isNotEmpty(authProperties.getCookieDomain())) {
             topDomain = authProperties.getCookieDomain();
-        }else{
+        } else {
             topDomain = null;
         }
         String[] langs = aliyunLanguage.split("_");
@@ -403,10 +358,10 @@ public class UserController extends BaseController {
             log.error("Aliyun language cookie value not valid, do nothing {}", aliyunLanguage);
             return;
         }
-        if(topDomain != null){
+        if (topDomain != null) {
             CookieUtil.setCookie(response, Constants.ALIYUN_COOKIE_LANG, langs[0], 0, topDomain);
             CookieUtil.setCookie(response, Constants.ALIYUN_COOKIE_TERRITORY, langs[1], 0, topDomain);
-        }else{
+        } else {
             CookieUtil.setCookie(response, Constants.ALIYUN_COOKIE_LANG, langs[0], 0);
             CookieUtil.setCookie(response, Constants.ALIYUN_COOKIE_TERRITORY, langs[1], 0);
         }

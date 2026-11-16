@@ -16,8 +16,6 @@ import org.springframework.stereotype.Service;
 @Slf4j
 public class PermissionServiceImpl implements PermissionService {
 
-    private static final String LOG_PRE = "[" + PermissionServiceImpl.class.getSimpleName() + "] ";
-
     @Autowired
     private AuthPolicy authPolicy;
 

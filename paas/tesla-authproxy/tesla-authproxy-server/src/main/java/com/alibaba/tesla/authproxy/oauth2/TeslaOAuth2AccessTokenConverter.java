@@ -2,7 +2,6 @@ package com.alibaba.tesla.authproxy.oauth2;
 
 import com.alibaba.tesla.authproxy.constants.AuthJwtConstants;
 import com.alibaba.tesla.authproxy.model.UserDO;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.provider.token.DefaultAccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.DefaultUserAuthenticationConverter;
@@ -12,14 +11,13 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 @Component
-@Slf4j
 public class TeslaOAuth2AccessTokenConverter extends DefaultAccessTokenConverter {
 
     public TeslaOAuth2AccessTokenConverter() {
         super.setUserTokenConverter(new TeslaUserAuthenticationConverter());
     }
 
-    private class TeslaUserAuthenticationConverter extends DefaultUserAuthenticationConverter {
+    private static class TeslaUserAuthenticationConverter extends DefaultUserAuthenticationConverter {
 
         @Override
         public Map<String, ?> convertUserAuthentication(Authentication authentication) {

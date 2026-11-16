@@ -6,8 +6,8 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.event.ContextRefreshedEvent;
 
-@Configuration
 @Slf4j
+@Configuration
 public class ApplicationStartup implements ApplicationListener<ContextRefreshedEvent> {
 
     @Autowired

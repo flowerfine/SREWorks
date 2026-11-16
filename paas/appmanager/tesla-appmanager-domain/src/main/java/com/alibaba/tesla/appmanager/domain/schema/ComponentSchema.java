@@ -4,7 +4,6 @@ import com.alibaba.fastjson.JSONObject;
 import com.alibaba.tesla.appmanager.domain.core.ImageTar;
 import com.alibaba.tesla.appmanager.domain.core.WorkloadResource;
 import lombok.Data;
-import lombok.extern.slf4j.Slf4j;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -16,10 +15,8 @@ import java.util.Map;
  *
  * @author yaoxing.gyx@alibaba-inc.com
  */
-@Slf4j
 @Data
 public class ComponentSchema implements Schema, Serializable {
-
     private static final long serialVersionUID = -7797463529846059161L;
 
     /**
@@ -47,7 +44,6 @@ public class ComponentSchema implements Schema, Serializable {
      */
     @Data
     public static class MetaData implements Serializable {
-
         private static final long serialVersionUID = -7986607001492546572L;
 
         private String name;
@@ -60,7 +56,6 @@ public class ComponentSchema implements Schema, Serializable {
      */
     @Data
     public static class Spec implements Serializable {
-
         private static final long serialVersionUID = 254059068778729289L;
 
         /**

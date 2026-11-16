@@ -15,13 +15,8 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.*;
 
-/**
- * @author tandong
- * @Description:TODO
- * @date 2019/3/20 23:39
- */
-@Component("dataBaseAuthServiceManager")
 @Slf4j
+@Component("dataBaseAuthServiceManager")
 public class DataBaseAuthServiceManager implements AuthServiceManager {
 
     @Autowired

@@ -17,6 +17,7 @@ import lombok.Data;
 @Data
 public class CustomAddonWorkloadSpec implements Serializable {
     private static final long serialVersionUID = 86436255778877475L;
+
     private Long appPackageId;
     private DeployAppSchema applicationConfig;
     private List<Parameter> parameterValues = new ArrayList<>();
@@ -25,11 +26,11 @@ public class CustomAddonWorkloadSpec implements Serializable {
     @Data
     public static class Parameter implements Serializable{
         private static final long serialVersionUID = 3657116190965794696L;
+
         private String name;
         private Boolean require;
         private Object defaultValue;
         private Object value = "";
         private List<String> fieldPath;
-
     }
 }

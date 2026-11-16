@@ -3,7 +3,6 @@ package com.alibaba.tesla.authproxy.interceptor;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.tesla.authproxy.AuthProperties;
 import com.alibaba.tesla.authproxy.Constants;
-import com.alibaba.tesla.authproxy.model.mapper.AppMapper;
 import com.alibaba.tesla.authproxy.model.UserDO;
 import com.alibaba.tesla.authproxy.service.TeslaUserService;
 import com.alibaba.tesla.authproxy.util.*;
@@ -23,21 +22,18 @@ import javax.servlet.http.HttpServletResponse;
  * @Description:TODO
  * @date 2019/3/20 21:11
  */
-@Component
 @Slf4j
+@Component
 public class DataBaseLoginInterceptor implements LoginInterceptor {
 
     @Autowired
-    AuthProperties authProperties;
+    private AuthProperties authProperties;
 
     @Autowired
-    AppMapper appMapper;
+    private TeslaUserService teslaUserService;
 
     @Autowired
-    TeslaUserService teslaUserService;
-
-    @Autowired
-    AuthUtil authUtil;
+    private AuthUtil authUtil;
 
     @Override
     public boolean interceptor(HttpServletRequest request, HttpServletResponse response) {

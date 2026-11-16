@@ -11,7 +11,6 @@ import java.util.Map;
  */
 @Data
 public class AddonResourceScheme implements Schema, Serializable {
-
     private static final long serialVersionUID = -2415106305621623316L;
 
     private AddonResourceDescribe addon;

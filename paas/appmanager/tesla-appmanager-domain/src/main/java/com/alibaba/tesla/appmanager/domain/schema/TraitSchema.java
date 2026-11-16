@@ -2,7 +2,6 @@ package com.alibaba.tesla.appmanager.domain.schema;
 
 import com.alibaba.fastjson.JSONObject;
 import lombok.Data;
-import lombok.extern.slf4j.Slf4j;
 
 import java.io.Serializable;
 
@@ -11,10 +10,8 @@ import java.io.Serializable;
  *
  * @author yaoxing.gyx@alibaba-inc.com
  */
-@Slf4j
 @Data
 public class TraitSchema implements Schema, Serializable {
-
     private static final long serialVersionUID = 7095150105558418313L;
 
     /**
@@ -42,7 +39,6 @@ public class TraitSchema implements Schema, Serializable {
      */
     @Data
     public static class MetaData implements Serializable {
-
         private static final long serialVersionUID = -3040036214175436386L;
 
         private String name;

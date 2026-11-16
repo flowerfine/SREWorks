@@ -36,9 +36,9 @@ import java.util.Map;
  *
  * @author yaoxing.gyx@alibaba-inc.com
  */
+@Slf4j
 @Controller
 @RequestMapping("permission")
-@Slf4j
 public class PermissionCheckController extends BaseController {
 
     /**

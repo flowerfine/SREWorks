@@ -40,7 +40,6 @@ public class AuthDbConfig {
     @Bean("authSessionTemplate")
     public SqlSessionTemplate authSessionTemplate(
         @Qualifier("authSessionFactory") SqlSessionFactory authSessionFactory) {
-        SqlSessionTemplate template = new SqlSessionTemplate(authSessionFactory);
-        return template;
+        return new SqlSessionTemplate(authSessionFactory);
     }
 }

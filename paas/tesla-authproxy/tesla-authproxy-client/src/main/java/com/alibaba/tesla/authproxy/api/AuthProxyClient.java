@@ -44,31 +44,6 @@ public class AuthProxyClient {
     }
 
     /**
-     * 获取用户信息 (内部版本)
-     * @return TeslaGetUserInfoResponse 对象
-     */
-    public TeslaUserInfoDo getUserDetail(String authUser, String authUserId)
-        throws AuthProxyClientException, AuthProxyServerException {
-        String apiResource = endpoint + AuthProxyResourceEnum.GET_USER_DETAIL.toURI();
-        if (logger.isDebugEnabled()) {
-            logger.debug("[AuthProxy] getUserDetail, authUser={}, authUserId={}", authUser, authUserId);
-        }
-
-        Map<String, String> headers = new HashMap<>();
-        headers.put("X-Auth-User", authUser);
-        headers.put("X-Auth-UserId", authUserId);
-        try {
-            JsonElement response = doGet(apiResource, null, headers);
-            if (logger.isDebugEnabled()) {
-                logger.debug("[AuthProxy] getUserDetail response, response={}", gson.toJson(response));
-            }
-            return gson.fromJson(response, TeslaUserInfoDo.class);
-        } catch (JsonSyntaxException e) {
-            throw new AuthProxyServerException(e);
-        }
-    }
-
-    /**
      * 获取用户信息
      * @param appId appId
      * @param request request 请求

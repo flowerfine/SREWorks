@@ -30,19 +30,18 @@ import java.util.List;
  *
  * @author yaoxing.gyx@alibaba-inc.com
  */
-@RestController
-@Api(tags = "用户权限 API", description = "用户权限 API")
-@RequestMapping("users/{userId:[a-zA-Z0-9,._:\\-|]+}")
-@Validated
 @Slf4j
+@Validated
+@RestController
+@RequestMapping("users/{userId:[a-zA-Z0-9,._:\\-|]+}")
+@Api(tags = "用户权限 API", description = "用户权限 API")
 public class UserPermissionController extends BaseController {
 
     @Autowired
     private UserPermissionService userPermissionService;
 
-    @ApiOperation(value = "检查指定用户是否拥有指定的权限列表")
     @PostMapping("permissions")
-    @ResponseBody
+    @ApiOperation(value = "检查指定用户是否拥有指定的权限列表")
     public TeslaBaseResult checkPermissions(
         @ApiParam("租户 ID")
         @NotEmpty

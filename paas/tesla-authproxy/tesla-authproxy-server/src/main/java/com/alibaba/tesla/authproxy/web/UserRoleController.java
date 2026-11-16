@@ -27,19 +27,18 @@ import javax.validation.constraints.Pattern;
  *
  * @author yaoxing.gyx@alibaba-inc.com
  */
-@RestController
-@Api(tags = "用户角色 API", description = "用户角色 API")
-@RequestMapping("users/{userId:[a-zA-Z0-9,._:\\-|]+}")
-@Validated
 @Slf4j
+@Validated
+@RestController
+@RequestMapping("users/{userId:[a-zA-Z0-9,._:\\-|]+}")
+@Api(tags = "用户角色 API", description = "用户角色 API")
 public class UserRoleController extends BaseController {
 
     @Autowired
     private UserRoleService userRoleService;
 
-    @ApiOperation(value = "获取指定用户的角色列表")
     @GetMapping("roles")
-    @ResponseBody
+    @ApiOperation(value = "获取指定用户的角色列表")
     public TeslaBaseResult getUserRoles(
         @ApiParam("租户 ID")
         @NotEmpty
@@ -76,9 +75,9 @@ public class UserRoleController extends BaseController {
         return TeslaResultFactory.buildSucceedResult(data);
     }
 
-    @ApiOperation(value = "增加用户角色")
+
     @PostMapping(value = "roles/{roleId:[a-zA-Z0-9,._:\\-|]+}")
-    @ResponseBody
+    @ApiOperation(value = "增加用户角色")
     public TeslaBaseResult addUserRoleRel(
         @ApiParam("租户 ID")
         @NotEmpty
@@ -104,9 +103,8 @@ public class UserRoleController extends BaseController {
         return TeslaResultFactory.buildSucceedResult();
     }
 
-    @ApiOperation(value = "删除用户角色")
     @DeleteMapping(value = "roles/{roleId:[a-zA-Z0-9,._:\\-|]+}")
-    @ResponseBody
+    @ApiOperation(value = "删除用户角色")
     public TeslaBaseResult delUserRoleRel(
         @ApiParam("租户 ID")
         @NotEmpty

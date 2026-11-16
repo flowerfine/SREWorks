@@ -21,5 +21,4 @@ public enum UserTypeEnum {
      * 普通用户
      */
     USER,
-
 }

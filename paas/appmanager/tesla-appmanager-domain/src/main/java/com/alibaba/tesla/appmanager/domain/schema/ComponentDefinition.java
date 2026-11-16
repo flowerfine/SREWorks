@@ -1,7 +1,6 @@
 package com.alibaba.tesla.appmanager.domain.schema;
 
 import lombok.Data;
-import lombok.extern.slf4j.Slf4j;
 
 import java.io.Serializable;
 
@@ -10,7 +9,6 @@ import java.io.Serializable;
  *
  * @author yaoxing.gyx@alibaba-inc.com
  */
-@Slf4j
 @Data
 public class ComponentDefinition implements Schema, Serializable {
 

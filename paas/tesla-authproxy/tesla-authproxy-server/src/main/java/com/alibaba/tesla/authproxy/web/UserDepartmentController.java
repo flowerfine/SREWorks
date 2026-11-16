@@ -19,11 +19,11 @@ import org.springframework.web.bind.annotation.*;
  *
  * @author yaoxing.gyx@alibaba-inc.com
  */
-@RestController
-@Api(tags = "用户部门 API", description = "用户部门 API")
-@RequestMapping("users/{userId:[a-zA-Z0-9,._:\\-|]+}")
-@Validated
 @Slf4j
+@Validated
+@RestController
+@RequestMapping("users/{userId:[a-zA-Z0-9,._:\\-|]+}")
+@Api(tags = "用户部门 API", description = "用户部门 API")
 public class UserDepartmentController extends BaseController {
 
     @Autowired
@@ -31,7 +31,6 @@ public class UserDepartmentController extends BaseController {
 
     @GetMapping("departments")
     @ApiOperation(value = "获取指定用户对应的所有下属对应的部门 ID 集合")
-    @ResponseBody
     public TeslaBaseResult retrieve(
         @ApiParam("当前用户")
         @NotEmpty

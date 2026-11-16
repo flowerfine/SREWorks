@@ -15,8 +15,8 @@ import org.springframework.stereotype.Component;
  * @version 1.0
  * @date 2017/5/13 下午4:19
  */
-@Component
 @Data
+@Component
 @ConfigurationProperties(prefix = "tesla")
 public class AuthProperties {
 
